@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoneLeaf : MonoBehaviour
 {
     public Vector3 OriginalPosition { get; private set; }
+    public Vector3 ReferencePosition { get; private set; }
     public BoneLeaf Parent { get; private set; }
     public List<BoneLeaf> Children { get; private set; }
 
@@ -13,7 +14,12 @@ public class BoneLeaf : MonoBehaviour
     public float springForce = 20f;
     public float damping = 5f;
 
+    public float oscillationForce = 10f;
+    public float oscillationPropagationRate = 0.5f;
+
     private Vector3 m_Velocity = Vector3.zero;
+    private float m_OscillationOffset;
+    private Vector3 m_Accel = Vector3.zero;
 
 
     private void Start()
@@ -30,18 +36,34 @@ public class BoneLeaf : MonoBehaviour
                 Children.Add(leaf);
             }
         }
+
+        m_OscillationOffset = Random.Range(-Mathf.PI, Mathf.PI);
     }
 
     private void Update()
     {
+        if (!Parent)
+        {
+            float phase = Time.time / 5f + m_OscillationOffset;
+            PropagateOscillation(phase, oscillationForce, oscillationPropagationRate);
+        }
+        
         Vector3 displacement = transform.localPosition - OriginalPosition;
-        //displacement.x *= uniformScale.x;
-        //displacement.y *= uniformScale.y;
         m_Velocity -= displacement * springForce * Time.deltaTime;
         m_Velocity *= 1f - damping * Time.deltaTime;
 
         transform.localPosition += m_Velocity * Time.deltaTime;
-        //displacedVertices[i].y += velocity.y * Time.deltaTime;
+    }
+
+    public void PropagateOscillation(float phase, float force, float propagation)
+    {
+        phase += propagation;
+
+        foreach (var child in Children)
+        {
+            m_Velocity = Vector3.SmoothDamp(m_Velocity, Vector3.right * Mathf.Sin(phase) * force, ref m_Accel, 1f);
+            child.PropagateOscillation(phase, force, propagation);
+        }
     }
 
     public void PropagateForce(Vector3 force)
