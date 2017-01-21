@@ -73,6 +73,11 @@ public class MainCharacterController : MonoBehaviour
         wall
     }
 
+    public bool GetShouldGoThroughTwoWayPlatforms()
+    {
+        return m_isJumping && m_timeSinceJumpPress < 0.2f;
+    }
+
 	void Start()
     {
         m_rigidBody = GetComponent<Rigidbody2D>();

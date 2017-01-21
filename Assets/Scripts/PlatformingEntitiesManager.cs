@@ -30,6 +30,13 @@ public class PlatformingEntitiesManager : MonoBehaviour
 
         bool ignorePassThroughCollisions = playerVerVel > 0.05f || Input.GetAxis("Vertical") < -0.9f;
 
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        if (go)
+        {
+            MainCharacterController controller = go.GetComponent<MainCharacterController>();
+            ignorePassThroughCollisions |= controller.GetShouldGoThroughTwoWayPlatforms();
+        }
+
         if (m_ignoringPassThroughCollisions != ignorePassThroughCollisions)
         {
             m_ignoringPassThroughCollisions = ignorePassThroughCollisions;
