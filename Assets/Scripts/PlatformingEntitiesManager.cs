@@ -46,6 +46,8 @@ public class PlatformingEntitiesManager : MonoBehaviour
 
     private void OnIgnorePassThroughCollisionsChanged(bool ignore)
     {
+        Physics2D.IgnoreLayerCollision(9, 10, ignore);
+
         if (m_collider)
         {
             foreach (PassThroughPlatform platform in m_passThroughPlatforms)
@@ -54,8 +56,6 @@ public class PlatformingEntitiesManager : MonoBehaviour
                 Physics2D.IgnoreCollision(m_collider, collider, ignore);
             }
         }
-
-        Physics2D.IgnoreLayerCollision(9, 10, ignore);
     }
     
     public void RegisterAirJumpHook(AirJumpHook hook)
