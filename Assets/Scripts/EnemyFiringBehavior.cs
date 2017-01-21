@@ -8,6 +8,7 @@ public class EnemyFiringBehavior : MonoBehaviour
     public GameObject projectile;
     public float delay_between_shots = 3.0f;
     public float player_target_range = 15.0f;
+    public PhaseType phase_type = PhaseType.Neutral;
 
     float m_shotCooldown = 0.0f;
     bool m_inRange = true;
@@ -20,8 +21,15 @@ public class EnemyFiringBehavior : MonoBehaviour
 
 	void Start ()
     {
-		
-	}
+        if (phase_type == PhaseType.Red)
+        {
+            Helpers.MakeRed(gameObject);
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Helpers.MakeBlue(gameObject);
+        }
+    }
 	
 	void Update ()
     {
@@ -61,7 +69,12 @@ public class EnemyFiringBehavior : MonoBehaviour
             {
                 m_shotCooldown -= delay_between_shots;
 
-                GameObject.Instantiate(projectile, transform.position, transform.rotation);
+                GameObject bullet = GameObject.Instantiate(projectile, transform.position, transform.rotation);
+                if (bullet)
+                {
+                    BulletBehavior bb = bullet.GetComponent<BulletBehavior>();
+                    bb.SetPhaseType(phase_type);
+                }
             }
         }
         else
@@ -84,5 +97,19 @@ public class EnemyFiringBehavior : MonoBehaviour
             Gizmos.DrawLine(transform.position - offsetV + offsetH, transform.position + transform.rotation * Vector2.up);
             Gizmos.DrawLine(transform.position - offsetV - offsetH, transform.position + transform.rotation * Vector2.up);
         }
+
+        if (phase_type == PhaseType.Red)
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else
+        {
+            return;
+        }
+        Gizmos.DrawCube(transform.position + new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.5f, 0.5f, 5.0f));
     }
 }

@@ -5,11 +5,25 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     public float speed = 8.0f;
+    PhaseType m_phaseType = PhaseType.Neutral;
 
-	void Start ()
+    public void SetPhaseType(PhaseType phaseType)
     {
-		
-	}
+        m_phaseType = phaseType;
+
+        if (m_phaseType == PhaseType.Red)
+        {
+            Helpers.MakeRed(gameObject);
+        }
+        else if (m_phaseType == PhaseType.Blue)
+        {
+            Helpers.MakeBlue(gameObject);
+        }
+    }
+
+    void Start ()
+    {
+    }
 
 	void Update ()
     {
@@ -20,7 +34,11 @@ public class BulletBehavior : MonoBehaviour
     {
         bool doDestroy = false;
 
-        if (collider.CompareTag("Player"))
+        if (collider.gameObject.layer == 8 || collider.gameObject.layer == 10)
+        {
+            doDestroy = true;
+        }
+        else if (collider.CompareTag("Player") && Helpers.ArePhasesOpposite(m_phaseType, WaveManager.Instance.CurrentPhase.phase_type))
         {
             GameObject go = GameObject.FindGameObjectWithTag("Player");
 
@@ -31,11 +49,7 @@ public class BulletBehavior : MonoBehaviour
             }
             doDestroy = true;
         }
-        else if (collider.gameObject.layer == 8 || collider.gameObject.layer == 10)
-        {
-            doDestroy = true;
-        }
-
+        
         if (doDestroy)
         {
             GameObject.Destroy(gameObject);
