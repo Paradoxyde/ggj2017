@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerPhaseComponent : WaveComponent
 {
+    void Awake()
+    {
+        Helpers.MakeGrey(gameObject);
+    }
+
     void Update()
     {
 

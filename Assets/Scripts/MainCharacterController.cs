@@ -314,7 +314,6 @@ public class MainCharacterController : MonoBehaviour
                 m_dashingDirection = m_moveInput.normalized;
 
                 float dashingAngle = Mathf.Atan2(m_dashingDirection.y, m_dashingDirection.x) * Mathf.Rad2Deg;
-                Debug.Log(dashingAngle);
                 if (dashingAngle >= 90 && dashingAngle < 180 - max_dashing_angle)
                 {
                     dashingAngle = 180 - max_dashing_angle;
