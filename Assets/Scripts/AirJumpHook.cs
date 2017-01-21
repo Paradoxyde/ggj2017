@@ -13,8 +13,15 @@ public class AirJumpHook : MonoBehaviour
 
 	void Start ()
     {
-		
-	}
+        if (phase_type == PhaseType.Red)
+        {
+            Helpers.MakeRed(gameObject);
+        }
+        else
+        {
+            Helpers.MakeBlue(gameObject);
+        }
+    }
 	
 	void Update ()
     {
@@ -22,19 +29,28 @@ public class AirJumpHook : MonoBehaviour
 
         m_timeSinceLastUsed += Time.deltaTime;
 
-        bool isAvailable = m_timeSinceLastUsed > cooldown_time && !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
+        UpdateColor();
 
-        if (m_isAvailable != isAvailable)
-        {
-            OnAvailableChanged(isAvailable);
-            m_isAvailable = isAvailable;
-        }
+        m_isAvailable = m_timeSinceLastUsed > cooldown_time && !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
     }
 
-    public void OnAvailableChanged(bool available)
+    void UpdateColor()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.enabled = available;
+        if (m_timeSinceLastUsed < cooldown_time)
+        {
+            Helpers.MakeGrey(gameObject);
+        }
+        else
+        {
+            if (phase_type == PhaseType.Red)
+            {
+                Helpers.MakeRed(gameObject);
+            }
+            else
+            {
+                Helpers.MakeBlue(gameObject);
+            }
+        }
     }
 
     public void OnUsed()

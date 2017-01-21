@@ -24,8 +24,19 @@ public class MainCamera : MonoBehaviour
 	
 	void Update ()
     {
+        FindTarget();
         UpdateOffset();
         UpdatePosition();
+    }
+
+    private void FindTarget()
+    {
+        if (!target)
+        {
+            var character = FindObjectOfType<MainCharacterController>();
+            if (character)
+                target = character.transform;
+        }
     }
 
     private void UpdateOffset()

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WaveComponent : MonoBehaviour
 {
-
     void Start()
     {
         WaveManager.Instance.Register(this);
@@ -15,7 +14,7 @@ public class WaveComponent : MonoBehaviour
 
     }
 
-    public void OnPhaseChanged(Phase phase)
+    public virtual void OnPhaseChanged(Phase phase)
     {
 
     }

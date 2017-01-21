@@ -12,6 +12,7 @@ public class MainCharacterController : MonoBehaviour
     public Transform left_sensor_pos;
     public Transform right_sensor_pos;
     public LayerMask ground_check_layers;
+    public LayerMask wall_check_layers;
     public float jump_force = 1000.0f;
     public float high_jump_force = 2400.0f;
     public float high_jump_duration = 0.25f;
@@ -26,15 +27,30 @@ public class MainCharacterController : MonoBehaviour
     public float wall_jump_control_lock_duration = 0.25f;
     public bool enable_wall_jump = true;
     public bool wall_jump_refreshes_air_jump = true;
+    public bool wall_jump_refreshes_dash = true;
     public float air_jump_hook_range = 1.5f;
+
+    public float dashing_speed = 40.0f;
+    public float min_dashing_duration = 0.15f;
+    public float max_dashing_duration = 0.30f;
+    public float max_dashing_angle = 25.0f;
 
     Vector2 m_moveInput = new Vector2();
     bool m_jumpHeld = false;
     bool m_isFreshJumpPress = true;
     float m_timeSinceJumpPress = 0.0f;
     float m_timeSinceJumpStart = 0.0f;
-    float m_timeHuggingWall = 0.0f;
     bool m_isJumping = false;
+
+    bool m_dashHeld = false;
+    bool m_isFreshDashPress = true;
+    float m_timeSinceDashPress = 0.0f;
+    float m_timeSinceLastDashStart = 10.0f;
+    bool m_isDashing = false;
+    bool m_isDashAvailabe = true;
+    Vector2 m_dashingDirection;
+
+    float m_timeHuggingWall = 0.0f;
     int m_airJumpCount = 0;
     bool m_isHuggingWall = false;
     bool m_wallHugIsOnRight = false;
@@ -70,13 +86,14 @@ public class MainCharacterController : MonoBehaviour
         UpdateHorizontalVelocity();
         UpdateWallHugging();
         UpdateJumping();
+        UpdateDashing();
     }
 
     void UpdateContacts()
     {
         m_isGrounded = Physics2D.OverlapCircle(feet_sensor_pos.position, ground_check_radius, ground_check_layers);
-        m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, ground_check_layers);
-        m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, ground_check_layers);
+        m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, wall_check_layers);
+        m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
 
         m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
@@ -84,7 +101,7 @@ public class MainCharacterController : MonoBehaviour
     void UpdateInputs()
     {
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        
+
         bool jumpHeld = Input.GetButton("Jump");
         if (jumpHeld)
         {
@@ -103,6 +120,27 @@ public class MainCharacterController : MonoBehaviour
             m_isFreshJumpPress = false;
         }
         m_jumpHeld = jumpHeld;
+
+        bool dashHeld = Input.GetButton("Dash");
+        if (dashHeld)
+        {
+            if (!m_dashHeld)
+            {
+                m_isFreshDashPress = true;
+                m_timeSinceDashPress = 0.0f;
+            }
+            else
+            {
+                m_timeSinceDashPress += Time.deltaTime;
+            }
+        }
+        else
+        {
+            m_isFreshDashPress = false;
+        }
+        m_dashHeld = dashHeld;
+
+        m_dashHeld = Input.GetButton("Dash");
     }
 
     void UpdateHorizontalVelocity()
@@ -197,6 +235,11 @@ public class MainCharacterController : MonoBehaviour
                     {
                         m_airJumpCount = 1;
                     }
+
+                    if (wall_jump_refreshes_dash && m_timeSinceLastDashStart > 0.2f)
+                    {
+                        m_isDashAvailabe = true;
+                    }
                 }
                 else if (!m_isHuggingWall && ((m_airJumpCount < air_jumps && currentVertSpeed <= 0.0f) || m_airJumpHook != null))
                 {
@@ -238,6 +281,61 @@ public class MainCharacterController : MonoBehaviour
             }
         }
     }
+
+    private void UpdateDashing()
+    {
+        m_timeSinceLastDashStart += Time.deltaTime;
+
+        if (m_isGrounded)
+        {
+            m_isDashAvailabe = true;
+        }
+
+        if (m_isDashing)
+        {
+            if ((m_dashHeld && m_timeSinceLastDashStart < max_dashing_duration) || m_timeSinceLastDashStart < min_dashing_duration)
+            {
+                m_rigidBody.velocity = m_dashingDirection * dashing_speed;
+            }
+            else
+            {
+                m_rigidBody.velocity = m_rigidBody.velocity * 0.5f;
+                m_isDashing = false;
+            }
+        }
+        else
+        {
+            if (m_dashHeld && m_isFreshDashPress && m_isDashAvailabe && m_timeSinceLastDashStart > 0.8)
+            {
+                m_isDashing = true;
+                m_isDashAvailabe = false;
+                m_timeSinceLastDashStart = 0.0f;
+                m_isFreshDashPress = false;
+                m_dashingDirection = m_moveInput.normalized;
+
+                float dashingAngle = Mathf.Atan2(m_dashingDirection.y, m_dashingDirection.x) * Mathf.Rad2Deg;
+                Debug.Log(dashingAngle);
+                if (dashingAngle >= 90 && dashingAngle < 180 - max_dashing_angle)
+                {
+                    dashingAngle = 180 - max_dashing_angle;
+                }
+                else if (dashingAngle <= 90 && dashingAngle > max_dashing_angle)
+                {
+                    dashingAngle = max_dashing_angle;
+                }
+                else if (dashingAngle <= -90 && dashingAngle > -180 + max_dashing_angle)
+                {
+                    dashingAngle = -180 + max_dashing_angle;
+                }
+                else if (dashingAngle >= -90 && dashingAngle < -max_dashing_angle)
+                {
+                    dashingAngle = -max_dashing_angle;
+                }
+                m_dashingDirection.x = Mathf.Cos(dashingAngle * Mathf.Deg2Rad);
+                m_dashingDirection.y = Mathf.Sin(dashingAngle * Mathf.Deg2Rad);
+            }
+        }
+    }
     
     private void OnGUI()
     {
@@ -248,8 +346,24 @@ public class MainCharacterController : MonoBehaviour
         if (m_hasRightContact) contacts += "right ";
         GUI.Label(new Rect(20, 20, 200, 100), String.Format("Horiz input: {0:0.00}", m_moveInput.x));
         GUI.Label(new Rect(20, 40, 200, 100),               "Jump held: " + (m_jumpHeld ? "true" : "false"));
-        GUI.Label(new Rect(20, 60, 200, 100),               "Hugging wall: " + (m_isHuggingWall ? "true" : "false"));
-        GUI.Label(new Rect(20, 80, 200, 100),               "Contacts : " + contacts);
-        GUI.Label(new Rect(20, 100, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));
+        GUI.Label(new Rect(20, 60, 200, 100),               "Dash held: " + (m_dashHeld ? "true" : "false"));
+        GUI.Label(new Rect(20, 80, 200, 100),               "Hugging wall: " + (m_isHuggingWall ? "true" : "false"));
+        GUI.Label(new Rect(20, 100, 200, 100),               "Contacts : " + contacts);
+        GUI.Label(new Rect(20, 120, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));
+    }
+
+    public void OnPlayerDied()
+    {
+        m_timeSinceJumpStart = 0.0f;
+        m_isJumping = false;
+        
+        m_timeSinceLastDashStart = 10.0f;
+        m_isDashing = false;
+        m_isDashAvailabe = true;
+
+        m_timeHuggingWall = 0.0f;
+        m_airJumpCount = 0;
+        m_isHuggingWall = false;
+        m_airJumpHook = null;
     }
 }
