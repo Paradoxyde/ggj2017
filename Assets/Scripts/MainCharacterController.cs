@@ -351,4 +351,19 @@ public class MainCharacterController : MonoBehaviour
         GUI.Label(new Rect(20, 100, 200, 100),               "Contacts : " + contacts);
         GUI.Label(new Rect(20, 120, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));
     }
+
+    public void OnPlayerDied()
+    {
+        m_timeSinceJumpStart = 0.0f;
+        m_isJumping = false;
+        
+        m_timeSinceLastDashStart = 10.0f;
+        m_isDashing = false;
+        m_isDashAvailabe = true;
+
+        m_timeHuggingWall = 0.0f;
+        m_airJumpCount = 0;
+        m_isHuggingWall = false;
+        m_airJumpHook = null;
+    }
 }

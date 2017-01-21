@@ -43,7 +43,13 @@ public class ColoredPlatform : MonoBehaviour
     {
         if (collision.collider.CompareTag("playerkillintersect"))
         {
-            Debug.Log("Kill player!");
+            GameObject go = GameObject.FindGameObjectWithTag("Player");
+
+            if (go)
+            {
+                PlatformingEntitiesManager pem = go.GetComponent<PlatformingEntitiesManager>();
+                pem.OnPlayerDied();
+            }
         }
     }
 }
