@@ -26,8 +26,8 @@ public class AirJumpHook : MonoBehaviour
 
         if (m_isAvailable != isAvailable)
         {
-            OnAvailableChanged(isAvailable);
             m_isAvailable = isAvailable;
+            OnAvailableChanged(m_isAvailable);
         }
     }
 
