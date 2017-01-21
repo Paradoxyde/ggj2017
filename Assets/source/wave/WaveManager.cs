@@ -85,7 +85,7 @@ public class WaveManager : MonoBehaviour
                 waveComponent.OnPhaseChanged(m_Phases[m_PhaseIndex]);
             }
 
-            //Debug.Log("Phase changed!");
+            Debug.Log("Phase changed!");
         }
     }
 }
