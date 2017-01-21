@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaveComponent : MonoBehaviour
 {
+
     void Start()
     {
         WaveManager.Instance.Register(this);
