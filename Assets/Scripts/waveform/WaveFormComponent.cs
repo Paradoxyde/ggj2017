@@ -10,4 +10,6 @@ public class WaveFormComponent : MonoBehaviour
 
     protected virtual void Start() { WaveFormManager.Instance.Register(this); }
     public virtual void UpdateWaveMean(float mean) { }
+
+    public virtual void UpdateAudioOutput(float v) { }
 }
