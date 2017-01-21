@@ -57,7 +57,6 @@ public class MainCharacterController : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_baseGravityScale = m_rigidBody.gravityScale;
-
     }
 	
 	void Update()
