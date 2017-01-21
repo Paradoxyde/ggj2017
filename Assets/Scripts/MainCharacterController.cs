@@ -65,6 +65,9 @@ public class MainCharacterController : MonoBehaviour
     Rigidbody2D m_rigidBody;
     PlatformingEntitiesManager m_platformingEntities;
     JumpType m_jumpType = JumpType.first;
+
+    private Animator m_animator;
+    private Transform m_visualsTransform;
     
     enum JumpType
     {
@@ -82,7 +85,11 @@ public class MainCharacterController : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_platformingEntities = GetComponent<PlatformingEntitiesManager>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_visualsTransform = m_animator.transform.parent;
         m_baseGravityScale = m_rigidBody.gravityScale;
+
+        m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
     }
 	
 	void Update()
@@ -115,6 +122,15 @@ public class MainCharacterController : MonoBehaviour
     void UpdateInputs()
     {
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (m_moveInput.x > 0f)
+        {
+            m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
+        }
+        else if (m_moveInput.x < 0f)
+        {
+            m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
+        }
 
         if (Input.GetButtonDown("Ghost"))
         {
