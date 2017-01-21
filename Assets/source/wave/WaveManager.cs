@@ -11,7 +11,8 @@ public class WaveManager : MonoBehaviour
     public List<Phase> m_Phases;
 
     public Phase CurrentPhase { get { return m_Phases[m_PhaseIndex]; } }
-    public float SinPhase { get; private set; }
+    public float CycleSinValue { get; private set; }
+    public float CycleProgress { get; private set; }
 
     private int m_AudioClipIndex = 0;
     private int m_PhaseIndex = 0;
@@ -65,8 +66,9 @@ public class WaveManager : MonoBehaviour
         if (m_CycleElapsedTime > m_CycleTimeInSeconds)
             m_CycleElapsedTime -= m_CycleTimeInSeconds;
 
-        float radElapsed = Mathf.PI * 2.0f / m_CycleTimeInSeconds * m_CycleElapsedTime;
-        SinPhase = Mathf.Sin(radElapsed);
+        CycleProgress = m_CycleTimeInSeconds / m_CycleElapsedTime;
+        float radElapsed = Mathf.PI * 2.0f * CycleProgress;
+        CycleSinValue = Mathf.Sin(radElapsed);
 
         if (m_PhaseElapsedTime >= currentPhase.PeriodInSeconds)
         {
