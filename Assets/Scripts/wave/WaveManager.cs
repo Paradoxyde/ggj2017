@@ -8,11 +8,15 @@ public class WaveManager : MonoBehaviour
     public static WaveManager Instance { get; private set; }
 
     public List<AudioClip> m_AudioClips;
-    public List<Phase> m_Phases;
+    public List<Phase> Phases;
 
-    public Phase CurrentPhase { get { return m_Phases[m_PhaseIndex]; } }
+    public Phase CurrentPhase { get { return Phases[m_PhaseIndex]; } }
+    public Phase NextPhase { get { int i = m_PhaseIndex + 1; if (i >= Phases.Count) i = 0; return Phases[i]; } }
     public float CycleSinValue { get; private set; }
     public float CycleProgress { get; private set; }
+    public float PhaseProgress { get { return Mathf.Min(m_PhaseElapsedTime / CurrentPhase.PeriodInSeconds, 1.0f); } }
+    public float PhaseRemaingTime { get { return Mathf.Max(CurrentPhase.PeriodInSeconds - m_PhaseElapsedTime, 0.0f); } }
+    public float PhaseElapsedTime { get { return m_PhaseElapsedTime; } }
 
     private int m_AudioClipIndex = 0;
     private int m_PhaseIndex = 0;
@@ -32,7 +36,7 @@ public class WaveManager : MonoBehaviour
         m_WaveComponents = new List<WaveComponent>();
 
         m_CycleTimeInSeconds = 0.0f;
-        foreach (Phase phase in m_Phases)
+        foreach (Phase phase in Phases)
             m_CycleTimeInSeconds += phase.PeriodInSeconds;
     }
 
@@ -75,17 +79,15 @@ public class WaveManager : MonoBehaviour
             m_PhaseElapsedTime = m_PhaseElapsedTime % currentPhase.PeriodInSeconds;
 
             m_PhaseIndex++;
-            if (m_PhaseIndex >= m_Phases.Count)
+            if (m_PhaseIndex >= Phases.Count)
             {
                 m_PhaseIndex = 0;
             }
 
             foreach (WaveComponent waveComponent in m_WaveComponents)
 			{
-                waveComponent.OnPhaseChanged(m_Phases[m_PhaseIndex]);
+                waveComponent.OnPhaseChanged(Phases[m_PhaseIndex]);
             }
-
-            //Debug.Log("Phase changed!");
         }
     }
 }
