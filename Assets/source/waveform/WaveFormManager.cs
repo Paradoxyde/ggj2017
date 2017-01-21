@@ -32,17 +32,12 @@ public class WaveFormManager : MonoBehaviour
     void Update()
     {
         float[] spectrum = new float[m_SampleSize * 2];
-        AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Hamming);
+        AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
         
-        //for (int i = 0; i < m_SampleSize; ++i)
-        //    m_MeanAmplitude += spectrum[i];
-
-        //m_MeanAmplitude /= m_SampleSize;
-            
         foreach (WaveFormComponent component in m_Components)
         {
-            int n1 = (int)Mathf.Floor(component.MinimumFrequnecy * m_SamplesPerFrequency);
-            int n2 = (int)Mathf.Floor(component.MaximumFrequnecy * m_SamplesPerFrequency);
+            int n1 = (int)Mathf.Floor(component.MinimumFrequency * m_SamplesPerFrequency);
+            int n2 = (int)Mathf.Floor(component.MaximumFrequency * m_SamplesPerFrequency);
             if (n1 == n2)
                 continue;
 
@@ -51,7 +46,7 @@ public class WaveFormManager : MonoBehaviour
                 mean += spectrum[i];
 
             mean /= (n2 - n1);
-            component.Resize(mean/* / m_MeanAmplitude*/);
+            component.UpdateWaveMean(mean);
         }
     }
 }

@@ -1,15 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class WaveFormComponent : MonoBehaviour
+public class RectangleWaveForm : WaveFormComponent
 {
-    public float MinimumFrequnecy;
-    public float MaximumFrequnecy;
-
-    public float m_Multiplier = 1.0f;
-
     public float m_MinimumSize = 100.0f;
     public float m_MaximumSize = 250.0f;
 
@@ -20,14 +14,13 @@ public class WaveFormComponent : MonoBehaviour
     private float m_SmoothVelocity = 0.0f;
     private float m_MeanAmplitude = 0.0f;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         m_Transform = GetComponent<RectTransform>();
-
-        WaveFormManager.Instance.Register(this);
     }
 
-    public void Resize(float mean)
+    public override void UpdateWaveMean(float mean)
     {
         m_MeanAmplitude = (m_MeanAmplitude + mean) * 0.5f;
 
