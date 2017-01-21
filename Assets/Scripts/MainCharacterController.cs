@@ -12,6 +12,7 @@ public class MainCharacterController : MonoBehaviour
     public Transform left_sensor_pos;
     public Transform right_sensor_pos;
     public LayerMask ground_check_layers;
+    public LayerMask wall_check_layers;
     public float jump_force = 1000.0f;
     public float high_jump_force = 2400.0f;
     public float high_jump_duration = 0.25f;
@@ -75,8 +76,8 @@ public class MainCharacterController : MonoBehaviour
     void UpdateContacts()
     {
         m_isGrounded = Physics2D.OverlapCircle(feet_sensor_pos.position, ground_check_radius, ground_check_layers);
-        m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, ground_check_layers);
-        m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, ground_check_layers);
+        m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, wall_check_layers);
+        m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
 
         m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
