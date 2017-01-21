@@ -60,10 +60,14 @@ public class MainCharacterController : MonoBehaviour
     bool m_isGrounded = false;
     bool m_hasLeftContact = false;
     bool m_hasRightContact = false;
+    bool m_isGhosting = false;
 
     Rigidbody2D m_rigidBody;
     PlatformingEntitiesManager m_platformingEntities;
     JumpType m_jumpType = JumpType.first;
+
+    private Animator m_animator;
+    private Transform m_visualsTransform;
     
     enum JumpType
     {
@@ -72,21 +76,38 @@ public class MainCharacterController : MonoBehaviour
         wall
     }
 
+    public bool GetShouldGoThroughTwoWayPlatforms()
+    {
+        return m_isJumping && m_timeSinceJumpPress < 0.2f;
+    }
+
 	void Start()
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_platformingEntities = GetComponent<PlatformingEntitiesManager>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_visualsTransform = m_animator.transform.parent;
         m_baseGravityScale = m_rigidBody.gravityScale;
+
+        m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
     }
 	
 	void Update()
     {
         UpdateContacts();
         UpdateInputs();
-        UpdateHorizontalVelocity();
-        UpdateWallHugging();
-        UpdateJumping();
-        UpdateDashing();
+        
+        if (m_isGhosting)
+        {
+            UpdateGhosting();
+        }
+        else
+        {
+            UpdateHorizontalVelocity();
+            UpdateWallHugging();
+            UpdateJumping();
+            UpdateDashing();
+        }
     }
 
     void UpdateContacts()
@@ -102,6 +123,42 @@ public class MainCharacterController : MonoBehaviour
     {
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        if (m_moveInput.x > 0f)
+        {
+            m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
+        }
+        else if (m_moveInput.x < 0f)
+        {
+            m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
+        }
+
+        if (Input.GetButtonDown("Ghost"))
+        {
+            m_isGhosting = !m_isGhosting; // [REMOVE]
+
+            if (m_isGhosting)
+            {
+                m_rigidBody.gravityScale = 0.0f;
+                m_rigidBody.velocity = Vector3.zero;
+
+                m_timeSinceJumpStart = 0.0f;
+                m_isJumping = false;
+
+                m_timeSinceLastDashStart = 10.0f;
+                m_isDashing = false;
+                m_isDashAvailabe = true;
+
+                m_timeHuggingWall = 0.0f;
+                m_airJumpCount = 0;
+                m_isHuggingWall = false;
+                m_airJumpHook = null;
+            }
+            else
+            {
+                m_rigidBody.gravityScale = m_baseGravityScale;
+            }
+        }
+
         bool jumpHeld = Input.GetButton("Jump");
         if (jumpHeld)
         {
@@ -110,16 +167,13 @@ public class MainCharacterController : MonoBehaviour
                 m_isFreshJumpPress = true;
                 m_timeSinceJumpPress = 0.0f;
             }
-            else
-            {
-                m_timeSinceJumpPress += Time.deltaTime;
-            }
         }
         else
         {
             m_isFreshJumpPress = false;
         }
         m_jumpHeld = jumpHeld;
+        m_timeSinceJumpPress += Time.deltaTime;
 
         bool dashHeld = Input.GetButton("Dash");
         if (dashHeld)
@@ -141,6 +195,15 @@ public class MainCharacterController : MonoBehaviour
         m_dashHeld = dashHeld;
 
         m_dashHeld = Input.GetButton("Dash");
+    }
+
+    void UpdateGhosting()
+    {
+        float ghostSpeed = 20.0f;
+        Vector3 position = transform.position;
+        position.x += m_moveInput.x * ghostSpeed * Time.deltaTime;
+        position.y += m_moveInput.y * ghostSpeed * Time.deltaTime;
+        transform.position = position;
     }
 
     void UpdateHorizontalVelocity()
@@ -343,12 +406,12 @@ public class MainCharacterController : MonoBehaviour
         if (m_isGrounded) contacts += "ground ";
         if (m_hasLeftContact) contacts += "left ";
         if (m_hasRightContact) contacts += "right ";
-        GUI.Label(new Rect(20, 20, 200, 100), String.Format("Horiz input: {0:0.00}", m_moveInput.x));
+        /*GUI.Label(new Rect(20, 20, 200, 100), String.Format("Horiz input: {0:0.00}", m_moveInput.x));
         GUI.Label(new Rect(20, 40, 200, 100),               "Jump held: " + (m_jumpHeld ? "true" : "false"));
         GUI.Label(new Rect(20, 60, 200, 100),               "Dash held: " + (m_dashHeld ? "true" : "false"));
         GUI.Label(new Rect(20, 80, 200, 100),               "Hugging wall: " + (m_isHuggingWall ? "true" : "false"));
         GUI.Label(new Rect(20, 100, 200, 100),               "Contacts : " + contacts);
-        GUI.Label(new Rect(20, 120, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));
+        GUI.Label(new Rect(20, 120, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));*/
     }
 
     public void OnPlayerDied()
