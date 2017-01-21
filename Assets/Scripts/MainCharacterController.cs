@@ -151,16 +151,13 @@ public class MainCharacterController : MonoBehaviour
                 m_isFreshJumpPress = true;
                 m_timeSinceJumpPress = 0.0f;
             }
-            else
-            {
-                m_timeSinceJumpPress += Time.deltaTime;
-            }
         }
         else
         {
             m_isFreshJumpPress = false;
         }
         m_jumpHeld = jumpHeld;
+        m_timeSinceJumpPress += Time.deltaTime;
 
         bool dashHeld = Input.GetButton("Dash");
         if (dashHeld)
