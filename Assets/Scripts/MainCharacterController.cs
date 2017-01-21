@@ -12,6 +12,7 @@ public class MainCharacterController : MonoBehaviour
     public Transform left_sensor_pos;
     public Transform right_sensor_pos;
     public LayerMask ground_check_layers;
+    public LayerMask wall_check_layers;
     public float jump_force = 1000.0f;
     public float high_jump_force = 2400.0f;
     public float high_jump_duration = 0.25f;
@@ -26,6 +27,7 @@ public class MainCharacterController : MonoBehaviour
     public float wall_jump_control_lock_duration = 0.25f;
     public bool enable_wall_jump = true;
     public bool wall_jump_refreshes_air_jump = true;
+    public float air_jump_hook_range = 1.5f;
 
     Vector2 m_moveInput = new Vector2();
     bool m_jumpHeld = false;
@@ -38,12 +40,14 @@ public class MainCharacterController : MonoBehaviour
     bool m_isHuggingWall = false;
     bool m_wallHugIsOnRight = false;
     float m_baseGravityScale = 10.0f;
+    AirJumpHook m_airJumpHook = null;
 
     bool m_isGrounded = false;
     bool m_hasLeftContact = false;
     bool m_hasRightContact = false;
 
     Rigidbody2D m_rigidBody;
+    PlatformingEntitiesManager m_platformingEntities;
     JumpType m_jumpType = JumpType.first;
     
     enum JumpType
@@ -56,6 +60,7 @@ public class MainCharacterController : MonoBehaviour
 	void Start()
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
+        m_platformingEntities = GetComponent<PlatformingEntitiesManager>();
         m_baseGravityScale = m_rigidBody.gravityScale;
     }
 	
@@ -71,8 +76,10 @@ public class MainCharacterController : MonoBehaviour
     void UpdateContacts()
     {
         m_isGrounded = Physics2D.OverlapCircle(feet_sensor_pos.position, ground_check_radius, ground_check_layers);
-        m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, ground_check_layers);
-        m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, ground_check_layers);
+        m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, wall_check_layers);
+        m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
+
+        m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
 
     void UpdateInputs()
@@ -176,7 +183,13 @@ public class MainCharacterController : MonoBehaviour
                 else if (enable_wall_jump && m_isHuggingWall && currentVertSpeed <= 0.0f && m_timeHuggingWall > 0.1f)
                 {
                     // Air jump
-                    m_rigidBody.AddForce(new Vector2(wall_jump_horiz_force * (m_wallHugIsOnRight ? -1.0f : 1.0f), double_jump_force - currentVertSpeed * double_jump_vel_force_factor));
+                    float horizForce = wall_jump_horiz_force * (m_wallHugIsOnRight ? -1.0f : 1.0f);
+                    if (horizForce * m_rigidBody.velocity.x > 0) // We're pushing in the direction we're already going, reduce the push
+                    {
+                        horizForce -= m_rigidBody.velocity.x * double_jump_vel_force_factor;
+                    }
+
+                    m_rigidBody.AddForce(new Vector2(horizForce, double_jump_force - currentVertSpeed * double_jump_vel_force_factor));
                     m_isFreshJumpPress = false;
                     m_timeSinceJumpStart = 0.0f;
                     m_jumpType = JumpType.wall;
@@ -186,13 +199,20 @@ public class MainCharacterController : MonoBehaviour
                         m_airJumpCount = 1;
                     }
                 }
-                else if (!m_isHuggingWall && m_airJumpCount < air_jumps && currentVertSpeed <= 0.0f)
+                else if (!m_isHuggingWall && ((m_airJumpCount < air_jumps && currentVertSpeed <= 0.0f) || m_airJumpHook != null))
                 {
                     // Double jump
                     m_rigidBody.AddForce(new Vector2(0.0f, double_jump_force - currentVertSpeed * double_jump_vel_force_factor));
                     m_isFreshJumpPress = false;
                     m_timeSinceJumpStart = 0.0f;
-                    m_airJumpCount++;
+                    if (m_airJumpHook != null)
+                    {
+                        m_airJumpHook.OnUsed();
+                    }
+                    else
+                    {
+                        m_airJumpCount++;
+                    }
                     m_jumpType = JumpType.air;
                 }
             }
@@ -231,5 +251,6 @@ public class MainCharacterController : MonoBehaviour
         GUI.Label(new Rect(20, 40, 200, 100),               "Jump held: " + (m_jumpHeld ? "true" : "false"));
         GUI.Label(new Rect(20, 60, 200, 100),               "Hugging wall: " + (m_isHuggingWall ? "true" : "false"));
         GUI.Label(new Rect(20, 80, 200, 100),               "Contacts : " + contacts);
+        GUI.Label(new Rect(20, 100, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));
     }
 }
