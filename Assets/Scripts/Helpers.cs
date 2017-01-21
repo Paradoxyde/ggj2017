@@ -9,4 +9,25 @@ public static class Helpers
         return (phaseA == PhaseType.Red && phaseB == PhaseType.Blue)
             || (phaseA == PhaseType.Blue && phaseB == PhaseType.Red);
     }
+
+    public static void MakeBlue(GameObject go)
+    {
+        SetColor(go, Color.blue);
+    }
+    public static void MakeRed(GameObject go)
+    {
+        SetColor(go, Color.red);
+    }
+    public static void MakeGrey(GameObject go)
+    {
+        SetColor(go, Color.grey);
+    }
+    public static void SetColor(GameObject go, Color color)
+    {
+        Renderer renderer = go.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material.SetColor("_Color", color);
+        }
+    }
 }

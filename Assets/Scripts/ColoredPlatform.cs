@@ -12,6 +12,15 @@ public class ColoredPlatform : MonoBehaviour
     void Start()
     {
         m_collider = GetComponent<Collider2D>();
+
+        if (phase_type == PhaseType.Red)
+        {
+            Helpers.MakeRed(gameObject);
+        }
+        else
+        {
+            Helpers.MakeBlue(gameObject);
+        }
     }
 	
 	void Update()
@@ -28,9 +37,6 @@ public class ColoredPlatform : MonoBehaviour
     void OnActiveChanged(bool active)
     {
         m_collider.enabled = active;
-
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.enabled = active;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
