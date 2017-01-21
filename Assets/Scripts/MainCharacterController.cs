@@ -60,6 +60,7 @@ public class MainCharacterController : MonoBehaviour
     bool m_isGrounded = false;
     bool m_hasLeftContact = false;
     bool m_hasRightContact = false;
+    bool m_isGhosting = false;
 
     Rigidbody2D m_rigidBody;
     PlatformingEntitiesManager m_platformingEntities;
@@ -83,10 +84,18 @@ public class MainCharacterController : MonoBehaviour
     {
         UpdateContacts();
         UpdateInputs();
-        UpdateHorizontalVelocity();
-        UpdateWallHugging();
-        UpdateJumping();
-        UpdateDashing();
+        
+        if (m_isGhosting)
+        {
+            UpdateGhosting();
+        }
+        else
+        {
+            UpdateHorizontalVelocity();
+            UpdateWallHugging();
+            UpdateJumping();
+            UpdateDashing();
+        }
     }
 
     void UpdateContacts()
@@ -101,6 +110,33 @@ public class MainCharacterController : MonoBehaviour
     void UpdateInputs()
     {
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (Input.GetButtonDown("Ghost"))
+        {
+            m_isGhosting = !m_isGhosting; // [REMOVE]
+
+            if (m_isGhosting)
+            {
+                m_rigidBody.gravityScale = 0.0f;
+                m_rigidBody.velocity = Vector3.zero;
+
+                m_timeSinceJumpStart = 0.0f;
+                m_isJumping = false;
+
+                m_timeSinceLastDashStart = 10.0f;
+                m_isDashing = false;
+                m_isDashAvailabe = true;
+
+                m_timeHuggingWall = 0.0f;
+                m_airJumpCount = 0;
+                m_isHuggingWall = false;
+                m_airJumpHook = null;
+            }
+            else
+            {
+                m_rigidBody.gravityScale = m_baseGravityScale;
+            }
+        }
 
         bool jumpHeld = Input.GetButton("Jump");
         if (jumpHeld)
@@ -141,6 +177,15 @@ public class MainCharacterController : MonoBehaviour
         m_dashHeld = dashHeld;
 
         m_dashHeld = Input.GetButton("Dash");
+    }
+
+    void UpdateGhosting()
+    {
+        float ghostSpeed = 20.0f;
+        Vector3 position = transform.position;
+        position.x += m_moveInput.x * ghostSpeed * Time.deltaTime;
+        position.y += m_moveInput.y * ghostSpeed * Time.deltaTime;
+        transform.position = position;
     }
 
     void UpdateHorizontalVelocity()
