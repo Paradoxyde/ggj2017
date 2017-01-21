@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class CheckpointReachedVolume : MonoBehaviour
 {
-    public int target_checkpoint;
+    public int target_checkpoint = 0;
+    public bool invisible_at_runtime = true;
 
-	void Start ()
+    void Start ()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer != null)
+        if (invisible_at_runtime)
         {
-            renderer.enabled = false;
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
         }
-	}
+    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
