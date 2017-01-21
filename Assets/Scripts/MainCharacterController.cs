@@ -141,7 +141,7 @@ public class MainCharacterController : MonoBehaviour
         else if (m_moveInput.x < 0f)
         {
             if (m_visualsTransform != null)
-                m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right); 
+                m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
         }
 
         if (Input.GetButtonDown("Ghost"))
