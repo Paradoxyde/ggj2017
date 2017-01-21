@@ -12,6 +12,15 @@ public class ColoredPlatform : MonoBehaviour
     void Start()
     {
         m_collider = GetComponent<Collider2D>();
+
+        if (phase_type == PhaseType.Red)
+        {
+            Helpers.MakeRed(gameObject);
+        }
+        else
+        {
+            Helpers.MakeBlue(gameObject);
+        }
     }
 	
 	void Update()
@@ -28,16 +37,36 @@ public class ColoredPlatform : MonoBehaviour
     void OnActiveChanged(bool active)
     {
         m_collider.enabled = active;
-
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.enabled = active;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("playerkillintersect"))
         {
-            Debug.Log("Kill player!");
+            GameObject go = GameObject.FindGameObjectWithTag("Player");
+
+            if (go)
+            {
+                PlatformingEntitiesManager pem = go.GetComponent<PlatformingEntitiesManager>();
+                pem.OnPlayerDied();
+            }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (phase_type == PhaseType.Red)
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else
+        {
+            return;
+        }
+        Gizmos.DrawCube(transform.position + new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 5.0f));
     }
 }

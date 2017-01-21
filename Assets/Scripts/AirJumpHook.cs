@@ -13,8 +13,15 @@ public class AirJumpHook : MonoBehaviour
 
 	void Start ()
     {
-		
-	}
+        if (phase_type == PhaseType.Red)
+        {
+            Helpers.MakeRed(gameObject);
+        }
+        else
+        {
+            Helpers.MakeBlue(gameObject);
+        }
+    }
 	
 	void Update ()
     {
@@ -22,19 +29,28 @@ public class AirJumpHook : MonoBehaviour
 
         m_timeSinceLastUsed += Time.deltaTime;
 
-        bool isAvailable = m_timeSinceLastUsed > cooldown_time && !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
+        UpdateColor();
 
-        if (m_isAvailable != isAvailable)
-        {
-            m_isAvailable = isAvailable;
-            OnAvailableChanged(m_isAvailable);
-        }
+        m_isAvailable = m_timeSinceLastUsed > cooldown_time && !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
     }
 
-    public void OnAvailableChanged(bool available)
+    void UpdateColor()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.enabled = available;
+        if (m_timeSinceLastUsed < cooldown_time)
+        {
+            Helpers.MakeGrey(gameObject);
+        }
+        else
+        {
+            if (phase_type == PhaseType.Red)
+            {
+                Helpers.MakeRed(gameObject);
+            }
+            else
+            {
+                Helpers.MakeBlue(gameObject);
+            }
+        }
     }
 
     public void OnUsed()
@@ -57,5 +73,22 @@ public class AirJumpHook : MonoBehaviour
             pem.RegisterAirJumpHook(this);
             m_registered = true;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (phase_type == PhaseType.Red)
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else
+        {
+            return;
+        }
+        Gizmos.DrawCube(transform.position + new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.5f, 0.5f, 5.0f));
     }
 }
