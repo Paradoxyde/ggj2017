@@ -19,7 +19,7 @@ public class SFXManager : MonoBehaviour
     public ManagedClip m_PlayingClip0;
     public ManagedClip m_PlayingClip1;
 
-    public SFXPreset[] m_SFXPresets = new SFXPresetCount[SFXPresetType.SFXPresetCount];
+    //public SFXPreset[] m_SFXPresets = new SFXPresetCount[(int)(SFXPresetType.SFXPresetCount)];
 
     private bool IsMuted = false;
     public float SFXMasterVolume = 1f;
@@ -43,9 +43,15 @@ public class SFXManager : MonoBehaviour
     void Update()
     {
         if (m_AudioSource0.isPlaying)
+        {
+            //if (m_PlayingPreset0.FadeInTime > m_AudioSource0)
+            //{
 
-        foreach (var preset in SFXPresets)
-            preset.Update();
+            //}
+        }
+
+        //foreach (var preset in m_SFXPresets)
+        //    preset.Update();
     }
     
     private float GetDampenerModifier(SoundDampener dampener)
