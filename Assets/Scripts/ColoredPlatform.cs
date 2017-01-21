@@ -52,4 +52,21 @@ public class ColoredPlatform : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        if (phase_type == PhaseType.Red)
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else
+        {
+            return;
+        }
+        Gizmos.DrawCube(transform.position + new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 5.0f));
+    }
 }
