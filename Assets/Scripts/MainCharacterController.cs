@@ -314,7 +314,6 @@ public class MainCharacterController : MonoBehaviour
                 m_dashingDirection = m_moveInput.normalized;
 
                 float dashingAngle = Mathf.Atan2(m_dashingDirection.y, m_dashingDirection.x) * Mathf.Rad2Deg;
-                Debug.Log(dashingAngle);
                 if (dashingAngle >= 90 && dashingAngle < 180 - max_dashing_angle)
                 {
                     dashingAngle = 180 - max_dashing_angle;
@@ -344,12 +343,12 @@ public class MainCharacterController : MonoBehaviour
         if (m_isGrounded) contacts += "ground ";
         if (m_hasLeftContact) contacts += "left ";
         if (m_hasRightContact) contacts += "right ";
-        GUI.Label(new Rect(20, 20, 200, 100), String.Format("Horiz input: {0:0.00}", m_moveInput.x));
+        /*GUI.Label(new Rect(20, 20, 200, 100), String.Format("Horiz input: {0:0.00}", m_moveInput.x));
         GUI.Label(new Rect(20, 40, 200, 100),               "Jump held: " + (m_jumpHeld ? "true" : "false"));
         GUI.Label(new Rect(20, 60, 200, 100),               "Dash held: " + (m_dashHeld ? "true" : "false"));
         GUI.Label(new Rect(20, 80, 200, 100),               "Hugging wall: " + (m_isHuggingWall ? "true" : "false"));
         GUI.Label(new Rect(20, 100, 200, 100),               "Contacts : " + contacts);
-        GUI.Label(new Rect(20, 120, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));
+        GUI.Label(new Rect(20, 120, 200, 100),               "Air hook? : " + (m_airJumpHook != null ? "true" : "false"));*/
     }
 
     public void OnPlayerDied()

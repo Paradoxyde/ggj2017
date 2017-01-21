@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class KillVolume : MonoBehaviour
 {
+    public bool invisible_at_runtime = true;
+
     void Start()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer != null)
+        if (invisible_at_runtime)
         {
-            renderer.enabled = false;
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
         }
     }
 
