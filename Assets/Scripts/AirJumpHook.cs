@@ -74,4 +74,21 @@ public class AirJumpHook : MonoBehaviour
             m_registered = true;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        if (phase_type == PhaseType.Red)
+        {
+            Gizmos.color = Color.red;
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Gizmos.color = Color.blue;
+        }
+        else
+        {
+            return;
+        }
+        Gizmos.DrawCube(transform.position + new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.5f, 0.5f, 5.0f));
+    }
 }
