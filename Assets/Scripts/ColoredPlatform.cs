@@ -6,14 +6,53 @@ public class ColoredPlatform : MonoBehaviour
 {
     public PhaseType phase_type = PhaseType.Red;
 
+    public float lowAlpha = 0.15f;
+    public float fadeDamping = 2f;
+    public Material opaqueMat;
+    public Material fadeMat;
+
     bool m_isActive = true;
     Collider2D m_collider;
     public SFXPreset player_killed_by_color_platform;
+    Renderer m_renderer;
 
     void Start()
     {
         m_collider = GetComponent<Collider2D>();
+        m_renderer = GetComponent<Renderer>();
 
+        ApplyColor();
+    }
+	
+	void Update()
+    {
+        bool isActive = !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
+        
+        if (m_isActive != isActive)
+        {
+            m_isActive = isActive;
+            OnActiveChanged(m_isActive);
+
+            if (isActive)
+            {
+                m_renderer.material = opaqueMat;
+            }
+            else
+            {
+                m_renderer.material = fadeMat;
+            }
+
+            ApplyColor();
+        }
+
+        float targetAlpha = isActive ? 1f : lowAlpha;
+        Color color = m_renderer.material.color;
+        color.a = Mathf.Lerp(color.a, targetAlpha, fadeDamping * Time.deltaTime);
+        m_renderer.material.color = color;
+    }
+
+    void ApplyColor()
+    {
         if (phase_type == PhaseType.Red)
         {
             Helpers.MakeRed(gameObject);
@@ -21,17 +60,6 @@ public class ColoredPlatform : MonoBehaviour
         else if (phase_type == PhaseType.Blue)
         {
             Helpers.MakeBlue(gameObject);
-        }
-    }
-	
-	void Update()
-    {
-        bool isActive = !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
-
-        if (m_isActive != isActive)
-        {
-            m_isActive = isActive;
-            OnActiveChanged(m_isActive);
         }
     }
 
