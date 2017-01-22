@@ -46,10 +46,13 @@ public class WaveManager : MonoBehaviour
         m_AudioClipIndex = -1;
 
         m_AudioSourceCache = GetComponent<AudioSource>();
+        m_AudioSourceCache.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
     }
 
     void Update()
     {
+        m_AudioSourceCache.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+
         // Play audio clip.
         if (!m_AudioSourceCache.isPlaying)
         {
