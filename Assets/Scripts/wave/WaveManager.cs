@@ -98,7 +98,7 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        m_AudioSourceCache.volume = music_volume);
+        m_AudioSourceCache.volume = music_volume;
 
         // Play audio clip.
         //if (!m_AudioSourceCache.isPlaying)
