@@ -8,11 +8,12 @@ public class SFXManager : MonoBehaviour
     
     private bool IsMuted = false;
     public float SFXVolume = 1f;
-
+    
     public static SFXManager Instance { get; private set; }
 
     private List<SFXPreset> m_SFXPresets = new List<SFXPreset>();
     public void Register(SFXPreset preset) { m_SFXPresets.Add(preset); }
+
     
     void Awake()
     {
@@ -54,8 +55,9 @@ public class SFXManager : MonoBehaviour
 
 static class SFXExtension
 {
-    static void PlayNow(this SFXPreset preset)
+    public static void PlayNow(this SFXPreset preset)
     {
-        SFXManager.Instance.PlaySound(preset);
+        if (preset != null)
+            SFXManager.Instance.PlaySound(preset);
     }
 }

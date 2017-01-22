@@ -21,7 +21,7 @@ public class SFXPreset
 
     public SFXPreset()
     {
-        SFXManager.Instance.Register(this);
+        //SFXManager.Instance.Register(this);
     }
 
     public void Update()

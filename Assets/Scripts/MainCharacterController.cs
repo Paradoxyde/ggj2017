@@ -38,6 +38,17 @@ public class MainCharacterController : MonoBehaviour
     public float jump_shockwave_force = 50f;
     public float jump_shockwave_radius = 6f;
 
+    public float wall_slide_sound_frequency = 0.2f;
+
+    public SFXPreset sound_jump;
+    public SFXPreset sound_air_jump;
+    public SFXPreset sound_air_hook_jump;
+    public SFXPreset sound_wall_jump;
+    public SFXPreset sound_wall_hang;
+    public SFXPreset sound_wall_slide;
+    public SFXPreset sound_land;
+    public SFXPreset sound_dash;
+
 
     Vector2 m_moveInput = new Vector2();
     bool m_lastInputWasRight = true;
@@ -128,6 +139,11 @@ public class MainCharacterController : MonoBehaviour
         m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
         
         if (m_isGrounded) m_airJumpCount = 0;
+
+        if (m_isGrounded && !wasOnGround)
+        {
+            SFXExtension.PlayNow(sound_land);
+        }
 
         m_animator.SetBool("OnLand", m_isGrounded && !wasOnGround);
         m_animator.SetBool("IsGrounded", m_isGrounded);
@@ -287,14 +303,23 @@ public class MainCharacterController : MonoBehaviour
         {
             shouldHugWall = ((m_moveInput.x <= 0f && m_hasLeftContact) || (m_moveInput.x >= 0f && m_hasRightContact)) && !m_isGrounded;
             m_timeHuggingWall += Time.deltaTime;
+
+            if (shouldHugWall)
+            {
+                if (m_timeHuggingWall % wall_slide_sound_frequency > (m_timeHuggingWall + Time.deltaTime) % wall_slide_sound_frequency)
+                {
+                    SFXExtension.PlayNow(sound_wall_slide);
+                }
+            }
         }
 
         if (m_isHuggingWall != shouldHugWall)
         {
             m_isHuggingWall = shouldHugWall;
             if (m_isHuggingWall) m_timeHuggingWall = 0.0f;
+            SFXExtension.PlayNow(sound_wall_hang);
         }
-        
+
         m_rigidBody.gravityScale = m_baseGravityScale * (m_isHuggingWall && currentVel.y <= 0 ? wall_hug_gravity_modifier : 1.0f);
     }
 
@@ -326,6 +351,8 @@ public class MainCharacterController : MonoBehaviour
                     m_jumpType = JumpType.first;
 
                     m_animator.SetBool("OnJump", true);
+
+                    SFXExtension.PlayNow(sound_jump);
                 }
                 else if (enable_wall_jump && m_isHuggingWall && currentVertSpeed <= 0.0f && m_timeHuggingWall > 0.1f)
                 {
@@ -340,6 +367,8 @@ public class MainCharacterController : MonoBehaviour
                     m_isFreshJumpPress = false;
                     m_timeSinceJumpStart = 0.0f;
                     m_jumpType = JumpType.wall;
+
+                    SFXExtension.PlayNow(sound_wall_jump);
                     
                     if (wall_jump_refreshes_air_jump)
                     {
@@ -361,10 +390,12 @@ public class MainCharacterController : MonoBehaviour
                     if (m_airJumpHook != null)
                     {
                         m_airJumpHook.OnUsed();
+                        SFXExtension.PlayNow(sound_air_hook_jump);
                     }
                     else
                     {
                         m_airJumpCount++;
+                        SFXExtension.PlayNow(sound_air_jump);
                     }
                     m_jumpType = JumpType.air;
                     m_animator.SetBool("OnJump", true);
@@ -425,6 +456,8 @@ public class MainCharacterController : MonoBehaviour
                 m_isDashAvailabe = false;
                 m_timeSinceLastDashStart = 0.0f;
                 m_isFreshDashPress = false;
+
+                SFXExtension.PlayNow(sound_dash);
 
                 if (m_moveInput.sqrMagnitude > 0.01f)
                 {
