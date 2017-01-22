@@ -285,7 +285,7 @@ public class MainCharacterController : MonoBehaviour
         }
         else
         {
-            shouldHugWall = (m_hasLeftContact || m_hasRightContact) && !m_isGrounded;
+            shouldHugWall = ((m_moveInput.x <= 0f && m_hasLeftContact) || (m_moveInput.x >= 0f && m_hasRightContact)) && !m_isGrounded;
             m_timeHuggingWall += Time.deltaTime;
         }
 
