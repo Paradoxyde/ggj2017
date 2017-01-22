@@ -10,6 +10,8 @@ public class BulletBehavior : MonoBehaviour
     public Transform red_particles;
     public Transform blue_particles;
     public Transform neutral_particles;
+    public SFXPreset sound_bullet_hit_player;
+    public SFXPreset sound_bullet_hit_wall;
 
     Transform childParticles;
 
@@ -55,6 +57,10 @@ public class BulletBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         bool doDestroy = false;
+        bool hitPlayer = false;
+
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+
 
         if (collider.gameObject.layer == 8 || collider.gameObject.layer == 10)
         {
@@ -62,18 +68,21 @@ public class BulletBehavior : MonoBehaviour
         }
         else if (collider.CompareTag("Player") && m_phaseType != WaveManager.Instance.CurrentPhase.phase_type)
         {
-            GameObject go = GameObject.FindGameObjectWithTag("Player");
-
             if (go)
             {
                 PlatformingEntitiesManager pem = go.GetComponent<PlatformingEntitiesManager>();
                 pem.OnPlayerDied();
             }
             doDestroy = true;
+            hitPlayer = true;
         }
 
         if (doDestroy)
         {
+            if (go != null && (transform.position - go.transform.position).sqrMagnitude < 400)
+            {
+                SFXExtension.PlayNow(hitPlayer ? sound_bullet_hit_player : sound_bullet_hit_wall);
+            }
             GameObject.Destroy(gameObject);
         }
     }
