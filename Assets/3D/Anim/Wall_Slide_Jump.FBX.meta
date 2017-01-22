@@ -103,6 +103,8 @@ ModelImporter:
     100190: TopoSurface001
     100192: TopoSurface002
     100194: //RootNode
+    100196: PhaseGirlP
+    100198: PhaseGirlp
     400000: AddonGeometry
     400002: Bone002
     400004: Bone002(mirrored)
@@ -201,6 +203,8 @@ ModelImporter:
     400190: TopoSurface001
     400192: TopoSurface002
     400194: //RootNode
+    400196: PhaseGirlP
+    400198: PhaseGirlp
     4300000: PhaseGirl_MeshPart0
     4300002: PhaseGirl_MeshPart1
     4300004: AddonGeometry
