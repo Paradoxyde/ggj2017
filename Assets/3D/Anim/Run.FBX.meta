@@ -1,0 +1,526 @@
+fileFormatVersion: 2
+guid: a1ec8feee36ea1241b2b408e9365dbaa
+timeCreated: 1485046764
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: AddonGeometry
+    100002: Bone002
+    100004: Bone002(mirrored)
+    100006: L_Wing00
+    100008: L_Wing01
+    100010: L_Wing02
+    100012: L_Wing03
+    100014: L_Wing04
+    100016: L_Wing05
+    100018: LeftHair
+    100020: Master
+    100022: PhaseGirl
+    100024: PhaseGirl Footsteps
+    100026: PhaseGirl Head
+    100028: PhaseGirl HeadNub
+    100030: PhaseGirl L Calf
+    100032: PhaseGirl L Clavicle
+    100034: PhaseGirl L Finger0
+    100036: PhaseGirl L Finger01
+    100038: PhaseGirl L Finger02
+    100040: PhaseGirl L Finger0Nub
+    100042: PhaseGirl L Finger1
+    100044: PhaseGirl L Finger11
+    100046: PhaseGirl L Finger12
+    100048: PhaseGirl L Finger1Nub
+    100050: PhaseGirl L Foot
+    100052: PhaseGirl L Forearm
+    100054: PhaseGirl L Hand
+    100056: PhaseGirl L Thigh
+    100058: PhaseGirl L Toe0
+    100060: PhaseGirl L Toe0Nub
+    100062: PhaseGirl L UpperArm
+    100064: PhaseGirl Neck
+    100066: PhaseGirl Pelvis
+    100068: PhaseGirl R Calf
+    100070: PhaseGirl R Clavicle
+    100072: PhaseGirl R Finger0
+    100074: PhaseGirl R Finger01
+    100076: PhaseGirl R Finger02
+    100078: PhaseGirl R Finger0Nub
+    100080: PhaseGirl R Finger1
+    100082: PhaseGirl R Finger11
+    100084: PhaseGirl R Finger12
+    100086: PhaseGirl R Finger1Nub
+    100088: PhaseGirl R Foot
+    100090: PhaseGirl R Forearm
+    100092: PhaseGirl R Hand
+    100094: PhaseGirl R Thigh
+    100096: PhaseGirl R Toe0
+    100098: PhaseGirl R Toe0Nub
+    100100: PhaseGirl R UpperArm
+    100102: PhaseGirl Spine
+    100104: PhaseGirl Spine1
+    100106: PhaseGirl Spine2
+    100108: PhaseGirl Spine3
+    100110: PhaseGirl_MeshPart0
+    100112: PhaseGirl_MeshPart1
+    100114: PhaseGirlp
+    100116: PhaseGirlp L ForeTwist
+    100118: PhaseGirlp LCalfTwist
+    100120: PhaseGirlp LThighTwist
+    100122: PhaseGirlp LUpArmTwist
+    100124: PhaseGirlp R ForeTwist
+    100126: PhaseGirlp RCalfTwist
+    100128: PhaseGirlp RThighTwist
+    100130: PhaseGirlp RUpArmTwist
+    100132: R_Hair
+    100134: R_Wing00
+    100136: R_Wing01
+    100138: R_Wing02
+    100140: R_Wing03
+    100142: R_Wing04
+    100144: R_Wing05
+    100146: //RootNode
+    100148: Scarf00
+    100150: Scarf01
+    100152: Scarf02
+    100154: ScarfNub
+    100156: TopoSurface001
+    100158: TopoSurface002
+    400000: AddonGeometry
+    400002: Bone002
+    400004: Bone002(mirrored)
+    400006: L_Wing00
+    400008: L_Wing01
+    400010: L_Wing02
+    400012: L_Wing03
+    400014: L_Wing04
+    400016: L_Wing05
+    400018: LeftHair
+    400020: Master
+    400022: PhaseGirl
+    400024: PhaseGirl Footsteps
+    400026: PhaseGirl Head
+    400028: PhaseGirl HeadNub
+    400030: PhaseGirl L Calf
+    400032: PhaseGirl L Clavicle
+    400034: PhaseGirl L Finger0
+    400036: PhaseGirl L Finger01
+    400038: PhaseGirl L Finger02
+    400040: PhaseGirl L Finger0Nub
+    400042: PhaseGirl L Finger1
+    400044: PhaseGirl L Finger11
+    400046: PhaseGirl L Finger12
+    400048: PhaseGirl L Finger1Nub
+    400050: PhaseGirl L Foot
+    400052: PhaseGirl L Forearm
+    400054: PhaseGirl L Hand
+    400056: PhaseGirl L Thigh
+    400058: PhaseGirl L Toe0
+    400060: PhaseGirl L Toe0Nub
+    400062: PhaseGirl L UpperArm
+    400064: PhaseGirl Neck
+    400066: PhaseGirl Pelvis
+    400068: PhaseGirl R Calf
+    400070: PhaseGirl R Clavicle
+    400072: PhaseGirl R Finger0
+    400074: PhaseGirl R Finger01
+    400076: PhaseGirl R Finger02
+    400078: PhaseGirl R Finger0Nub
+    400080: PhaseGirl R Finger1
+    400082: PhaseGirl R Finger11
+    400084: PhaseGirl R Finger12
+    400086: PhaseGirl R Finger1Nub
+    400088: PhaseGirl R Foot
+    400090: PhaseGirl R Forearm
+    400092: PhaseGirl R Hand
+    400094: PhaseGirl R Thigh
+    400096: PhaseGirl R Toe0
+    400098: PhaseGirl R Toe0Nub
+    400100: PhaseGirl R UpperArm
+    400102: PhaseGirl Spine
+    400104: PhaseGirl Spine1
+    400106: PhaseGirl Spine2
+    400108: PhaseGirl Spine3
+    400110: PhaseGirl_MeshPart0
+    400112: PhaseGirl_MeshPart1
+    400114: PhaseGirlp
+    400116: PhaseGirlp L ForeTwist
+    400118: PhaseGirlp LCalfTwist
+    400120: PhaseGirlp LThighTwist
+    400122: PhaseGirlp LUpArmTwist
+    400124: PhaseGirlp R ForeTwist
+    400126: PhaseGirlp RCalfTwist
+    400128: PhaseGirlp RThighTwist
+    400130: PhaseGirlp RUpArmTwist
+    400132: R_Hair
+    400134: R_Wing00
+    400136: R_Wing01
+    400138: R_Wing02
+    400140: R_Wing03
+    400142: R_Wing04
+    400144: R_Wing05
+    400146: //RootNode
+    400148: Scarf00
+    400150: Scarf01
+    400152: Scarf02
+    400154: ScarfNub
+    400156: TopoSurface001
+    400158: TopoSurface002
+    4300000: PhaseGirl_MeshPart0
+    4300002: PhaseGirl_MeshPart1
+    4300004: AddonGeometry
+    7400000: PhaseGirl_Run
+    9500000: //RootNode
+    13700000: AddonGeometry
+    13700002: PhaseGirl_MeshPart0
+    13700004: PhaseGirl_MeshPart1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: PhaseGirl_Run
+      takeName: PhaseGirl_Run
+      firstFrame: 7
+      lastFrame: 27
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: AddonGeometry
+        weight: 1
+      - path: Master
+        weight: 1
+      - path: Master/PhaseGirlp
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Footsteps
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl L Thigh
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl L Thigh/PhaseGirl L Calf
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl L Thigh/PhaseGirl L Calf/PhaseGirl
+          L Foot
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl L Thigh/PhaseGirl L Calf/PhaseGirl
+          L Foot/PhaseGirl L Toe0
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl L Thigh/PhaseGirl L Calf/PhaseGirl
+          L Foot/PhaseGirl L Toe0/PhaseGirl L Toe0Nub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl L Thigh/PhaseGirlp LCalfTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl R Thigh
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl R Thigh/PhaseGirl R Calf
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl R Thigh/PhaseGirl R Calf/PhaseGirl
+          R Foot
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl R Thigh/PhaseGirl R Calf/PhaseGirl
+          R Foot/PhaseGirl R Toe0
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl R Thigh/PhaseGirl R Calf/PhaseGirl
+          R Foot/PhaseGirl R Toe0/PhaseGirl R Toe0Nub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl R Thigh/PhaseGirlp RCalfTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/L_Wing00
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/L_Wing00/L_Wing01
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/L_Wing00/L_Wing01/L_Wing02
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/L_Wing00/L_Wing01/L_Wing02/L_Wing03
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/L_Wing00/L_Wing01/L_Wing02/L_Wing03/L_Wing04
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/L_Wing00/L_Wing01/L_Wing02/L_Wing03/L_Wing04/L_Wing05
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl Head
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl Head/LeftHair
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl Head/LeftHair/Bone002
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl Head/PhaseGirl HeadNub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl Head/R_Hair
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl Head/R_Hair/Bone002(mirrored)
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger0
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger0/PhaseGirl
+          L Finger01
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger0/PhaseGirl
+          L Finger01/PhaseGirl L Finger02
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger0/PhaseGirl
+          L Finger01/PhaseGirl L Finger02/PhaseGirl L Finger0Nub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger1
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger1/PhaseGirl
+          L Finger11
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger1/PhaseGirl
+          L Finger11/PhaseGirl L Finger12
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirl L Forearm/PhaseGirl L Hand/PhaseGirl L Finger1/PhaseGirl
+          L Finger11/PhaseGirl L Finger12/PhaseGirl L Finger1Nub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirl L
+          UpperArm/PhaseGirlp L ForeTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl L Clavicle/PhaseGirlp LUpArmTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger0
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger0/PhaseGirl
+          R Finger01
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger0/PhaseGirl
+          R Finger01/PhaseGirl R Finger02
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger0/PhaseGirl
+          R Finger01/PhaseGirl R Finger02/PhaseGirl R Finger0Nub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger1
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger1/PhaseGirl
+          R Finger11
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger1/PhaseGirl
+          R Finger11/PhaseGirl R Finger12
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirl R Forearm/PhaseGirl R Hand/PhaseGirl R Finger1/PhaseGirl
+          R Finger11/PhaseGirl R Finger12/PhaseGirl R Finger1Nub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirl R
+          UpperArm/PhaseGirlp R ForeTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/PhaseGirl Neck/PhaseGirl R Clavicle/PhaseGirlp RUpArmTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/R_Wing00
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/R_Wing00/R_Wing01
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/R_Wing00/R_Wing01/R_Wing02
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/R_Wing00/R_Wing01/R_Wing02/R_Wing03
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/R_Wing00/R_Wing01/R_Wing02/R_Wing03/R_Wing04
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/R_Wing00/R_Wing01/R_Wing02/R_Wing03/R_Wing04/R_Wing05
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/Scarf00
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/Scarf00/Scarf01
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/Scarf00/Scarf01/Scarf02
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirl Spine1/PhaseGirl
+          Spine2/PhaseGirl Spine3/Scarf00/Scarf01/Scarf02/ScarfNub
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirlp LThighTwist
+        weight: 1
+      - path: Master/PhaseGirlp/PhaseGirl Pelvis/PhaseGirl Spine/PhaseGirlp RThighTwist
+        weight: 1
+      - path: PhaseGirl
+        weight: 1
+      - path: PhaseGirl/PhaseGirl_MeshPart0
+        weight: 1
+      - path: PhaseGirl/PhaseGirl_MeshPart1
+        weight: 1
+      - path: TopoSurface001
+        weight: 1
+      - path: TopoSurface002
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -35,6 +35,10 @@ public class MainCharacterController : MonoBehaviour
     public float max_dashing_duration = 0.30f;
     public float max_dashing_angle = 25.0f;
 
+    public float jump_shockwave_force = 50f;
+    public float jump_shockwave_radius = 6f;
+
+
     Vector2 m_moveInput = new Vector2();
     bool m_lastInputWasRight = true;
     bool m_jumpHeld = false;
@@ -96,8 +100,8 @@ public class MainCharacterController : MonoBehaviour
         if (m_visualsTransform != null)
             m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
     }
-	
-	void Update()
+
+    void Update()
     {
         UpdateContacts();
         UpdateInputs();
@@ -120,6 +124,8 @@ public class MainCharacterController : MonoBehaviour
         m_isGrounded = Physics2D.OverlapCircle(feet_sensor_pos.position, ground_check_radius, ground_check_layers);
         m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, wall_check_layers);
         m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
+
+        if (m_isGrounded) m_airJumpCount = 0;
 
         m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
@@ -144,6 +150,15 @@ public class MainCharacterController : MonoBehaviour
                 m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
         }
 
+        if (m_moveInput.x != 0)
+        {
+            m_animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            m_animator.SetBool("IsRunning", false);
+        }
+
         if (Input.GetButtonDown("Ghost"))
         {
             m_isGhosting = !m_isGhosting; // [REMOVE]
@@ -164,10 +179,15 @@ public class MainCharacterController : MonoBehaviour
                 m_airJumpCount = 0;
                 m_isHuggingWall = false;
                 m_airJumpHook = null;
+
+                Collider2D col = GetComponent<Collider2D>();
+                col.enabled = false;
             }
             else
             {
                 m_rigidBody.gravityScale = m_baseGravityScale;
+                Collider2D col = GetComponent<Collider2D>();
+                col.enabled = true;
             }
         }
 
@@ -178,6 +198,7 @@ public class MainCharacterController : MonoBehaviour
             {
                 m_isFreshJumpPress = true;
                 m_timeSinceJumpPress = 0.0f;
+                Helpers.ShockWave(transform.position, jump_shockwave_radius, jump_shockwave_force);
             }
         }
         else
@@ -211,7 +232,7 @@ public class MainCharacterController : MonoBehaviour
 
     void UpdateGhosting()
     {
-        float ghostSpeed = 20.0f;
+        float ghostSpeed = 40.0f;
         Vector3 position = transform.position;
         position.x += m_moveInput.x * ghostSpeed * Time.deltaTime;
         position.y += m_moveInput.y * ghostSpeed * Time.deltaTime;
@@ -336,7 +357,7 @@ public class MainCharacterController : MonoBehaviour
             else
             {
                 // Handle different jump heights
-                if (m_isJumping && !m_hasLeftContact && !m_hasRightContact)
+                if (m_isJumping /*&& !m_hasLeftContact && !m_hasRightContact*/)
                 {
                     if (m_jumpType == JumpType.first)
                     {

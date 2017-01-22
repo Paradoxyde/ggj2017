@@ -9,10 +9,15 @@ public class PlatformingEntitiesManager : MonoBehaviour
     List<Checkpoint> m_checkpoints;
     Rigidbody2D m_rigidBody;
     Collider2D m_collider;
+    public ParticleSystem death_particles;
 
     bool m_ignoringPassThroughCollisions = false;
     int m_currentCheckpoint = 0;
     Vector3 m_initialPlayerPosition;
+
+    bool m_isDying = false;
+    float m_deathDuration = 1.0f;
+    float m_deathTimer = 0.0f;
 
     void Start()
     {
@@ -41,6 +46,22 @@ public class PlatformingEntitiesManager : MonoBehaviour
         {
             m_ignoringPassThroughCollisions = ignorePassThroughCollisions;
             OnIgnorePassThroughCollisionsChanged(m_ignoringPassThroughCollisions);
+        }
+
+        if (m_isDying)
+        {
+            m_deathTimer += Time.deltaTime;
+            if (m_deathTimer >= m_deathDuration)
+            {
+                transform.position = GetRespawnPosition();
+
+                SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+                foreach (SkinnedMeshRenderer r in renderers)
+                {
+                    r.enabled = true;
+                }
+                m_isDying = false;
+            }
         }
 	}
 
@@ -126,12 +147,24 @@ public class PlatformingEntitiesManager : MonoBehaviour
 
     public void OnPlayerDied()
     {
-        transform.position = GetRespawnPosition();
-
-        MainCharacterController controller = GetComponent<MainCharacterController>();
-        if (controller != null)
+        if (!m_isDying)
         {
-            controller.OnPlayerDied();
+            SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (SkinnedMeshRenderer r in renderers)
+            {
+                r.enabled = false;
+            }
+
+            MainCharacterController controller = GetComponent<MainCharacterController>();
+            if (controller != null)
+            {
+                controller.OnPlayerDied();
+            }
+
+            GameObject.Instantiate(death_particles, transform.position, transform.rotation);
+
+            m_isDying = true;
+            m_deathTimer = 0.0f;
         }
     }
 
