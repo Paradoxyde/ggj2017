@@ -100,8 +100,8 @@ public class MainCharacterController : MonoBehaviour
         if (m_visualsTransform != null)
             m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
     }
-	
-	void Update()
+
+    void Update()
     {
         UpdateContacts();
         UpdateInputs();
@@ -357,7 +357,7 @@ public class MainCharacterController : MonoBehaviour
             else
             {
                 // Handle different jump heights
-                if (m_isJumping && !m_hasLeftContact && !m_hasRightContact)
+                if (m_isJumping /*&& !m_hasLeftContact && !m_hasRightContact*/)
                 {
                     if (m_jumpType == JumpType.first)
                     {
