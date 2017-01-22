@@ -4,26 +4,59 @@ using UnityEngine;
 
 public class AirJumpHook : MonoBehaviour
 {
+    public bool invisible_at_runtime = true;
     public float cooldown_time = 0.5f;
     public PhaseType phase_type = PhaseType.Red;
+
+    public Transform red_particles;
+    public Transform blue_particles;
+    public Transform neutral_particles;
+
+    Transform childParticles;
 
     bool m_registered = false;
     float m_timeSinceLastUsed = 10.0f;
     bool m_isAvailable = true;
+    bool m_wasOnCooldown = false;
 
 	void Start ()
     {
+        if (invisible_at_runtime)
+        {
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
+        }
+
         if (phase_type == PhaseType.Red)
         {
             Helpers.MakeRed(gameObject);
+            SetParticles(red_particles);
+        }
+        else if (phase_type == PhaseType.Blue)
+        {
+            Helpers.MakeBlue(gameObject);
+            SetParticles(blue_particles);
         }
         else
         {
-            Helpers.MakeBlue(gameObject);
+            SetParticles(neutral_particles);
         }
     }
-	
-	void Update ()
+
+    private void SetParticles(Transform ps)
+    {
+        if (childParticles != null)
+        {
+            GameObject.Destroy(childParticles);
+        }
+
+        childParticles = GameObject.Instantiate(ps, transform.position, transform.rotation, transform);
+    }
+
+    void Update()
     {
         if (!m_registered) TryRegister();
 
@@ -31,7 +64,28 @@ public class AirJumpHook : MonoBehaviour
 
         UpdateColor();
 
-        m_isAvailable = m_timeSinceLastUsed > cooldown_time && !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type);
+        bool isOnCooldown = m_timeSinceLastUsed < cooldown_time;
+
+        if (isOnCooldown != m_wasOnCooldown)
+        {
+            if (childParticles != null)
+            {
+                ParticleSystem ps = childParticles.GetComponent<ParticleSystem>();
+                if (ps != null)
+                {
+                    if (isOnCooldown)
+                    {
+                        ps.Clear();
+                    }
+
+                    ParticleSystem.MainModule mainModule = ps.main;
+                    mainModule.startSize = isOnCooldown ? 0.1f : 2.5f;
+                }
+            }
+        }
+
+        m_wasOnCooldown = m_timeSinceLastUsed < cooldown_time;
+        m_isAvailable = m_timeSinceLastUsed > cooldown_time && !Helpers.ArePhasesOpposite(phase_type, WaveManager.Instance.CurrentPhase.phase_type); ;
     }
 
     void UpdateColor()
@@ -49,6 +103,22 @@ public class AirJumpHook : MonoBehaviour
             else
             {
                 Helpers.MakeBlue(gameObject);
+            }
+        }
+    }
+
+    public void OnClosestChanged(bool isClosest)
+    {
+        if (childParticles != null)
+        {
+            ParticleSystem ps = childParticles.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ParticleSystem.EmissionModule emissionModule = ps.emission;
+                emissionModule.rateOverTimeMultiplier = isClosest ? 20.0f : 1.0f;
+                ParticleSystem.MainModule mainModule = ps.main;
+                mainModule.startLifetime = isClosest ? 0.2f : 2.0f;
+                mainModule.startSize = isClosest ? 5.0f : 2.5f;
             }
         }
     }

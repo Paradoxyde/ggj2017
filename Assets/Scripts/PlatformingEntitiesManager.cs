@@ -18,6 +18,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
     bool m_isDying = false;
     float m_deathDuration = 1.0f;
     float m_deathTimer = 0.0f;
+    AirJumpHook m_previousClosestHook;
 
     void Start()
     {
@@ -141,6 +142,17 @@ public class PlatformingEntitiesManager : MonoBehaviour
                 closestHook = hook;
             }
         }
+
+        if (m_previousClosestHook != null && m_previousClosestHook != closestHook)
+        {
+            m_previousClosestHook.OnClosestChanged(false);
+        }
+
+        if (closestHook != null && m_previousClosestHook != closestHook)
+        {
+            closestHook.OnClosestChanged(true);
+        }
+        m_previousClosestHook = closestHook;
 
         return closestHook;
     }
