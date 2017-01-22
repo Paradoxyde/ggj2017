@@ -11,6 +11,10 @@ public class PlatformingEntitiesManager : MonoBehaviour
     Collider2D m_collider;
     public ParticleSystem death_particles;
 
+    public SFXPreset sound_air_hook_in_range;
+    public SFXPreset sound_respawn;
+    public SFXPreset sound_mission_start;
+
     bool m_ignoringPassThroughCollisions = false;
     int m_currentCheckpoint = 0;
     Vector3 m_initialPlayerPosition;
@@ -28,6 +32,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_collider = GetComponent<Collider2D>();
         m_initialPlayerPosition = transform.position;
+        SFXExtension.PlayNow(sound_mission_start);
     }
 
     void Update()
@@ -51,6 +56,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
             m_deathTimer += Time.deltaTime;
             if (m_deathTimer >= m_deathDuration)
             {
+                SFXExtension.PlayNow(sound_respawn);
                 transform.position = GetRespawnPosition();
 
                 SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -149,6 +155,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
         if (closestHook != null && m_previousClosestHook != closestHook)
         {
             closestHook.OnClosestChanged(true);
+            SFXExtension.PlayNow(sound_air_hook_in_range);
         }
         m_previousClosestHook = closestHook;
 

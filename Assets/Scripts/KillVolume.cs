@@ -6,6 +6,7 @@ public class KillVolume : MonoBehaviour
 {
     public bool invisible_at_runtime = true;
     public PhaseType phase_type = PhaseType.Neutral;
+    public SFXPreset sound_kill_by_spikes;
 
     bool m_playerContact = false;
 
@@ -33,6 +34,7 @@ public class KillVolume : MonoBehaviour
                 {
                     PlatformingEntitiesManager pem = go.GetComponent<PlatformingEntitiesManager>();
                     pem.OnPlayerDied();
+                    SFXExtension.PlayNow(sound_kill_by_spikes);
                 }
             }
         }

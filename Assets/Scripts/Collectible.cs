@@ -6,6 +6,7 @@ public class Collectible : MonoBehaviour
 {
     public float wiggle_amplitude = 0.5f;
     public float wiggle_duration = 3.0f;
+    public SFXPreset sound_collectible_pickup;
 
     Vector3 m_basePos;
     float m_wiggleCycleProgress = 0.0f;
@@ -35,6 +36,8 @@ public class Collectible : MonoBehaviour
         {
             renderer.enabled = false;
         }
+
+        SFXExtension.PlayNow(sound_collectible_pickup);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

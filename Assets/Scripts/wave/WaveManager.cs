@@ -28,6 +28,7 @@ public class WaveManager : MonoBehaviour
     private float m_CycleElapsedTime = 0.0f;
     private float m_CycleTimeInSeconds = 0.0f;
     private List<WaveComponent> m_WaveComponents;
+    public float music_volume = 0.5f;
 
     private AudioSource m_AudioSourceCache;
 
@@ -97,7 +98,7 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        //m_AudioSourceCache.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        m_AudioSourceCache.volume = music_volume;
 
         // Play audio clip.
         //if (!m_AudioSourceCache.isPlaying)
