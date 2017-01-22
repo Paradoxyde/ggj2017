@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class WaveManager : MonoBehaviour
@@ -137,5 +138,10 @@ public class WaveManager : MonoBehaviour
                 waveComponent.OnPhaseChanged(Phases[m_PhaseIndex]);
             }
         }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("LDstuff");
     }
 }

@@ -42,12 +42,9 @@ public class PlatformingEntitiesManager : MonoBehaviour
             MainCharacterController controller = go.GetComponent<MainCharacterController>();
             ignorePassThroughCollisions |= controller.GetShouldGoThroughTwoWayPlatforms();
         }
-
-        if (m_ignoringPassThroughCollisions != ignorePassThroughCollisions)
-        {
-            m_ignoringPassThroughCollisions = ignorePassThroughCollisions;
-            OnIgnorePassThroughCollisionsChanged(m_ignoringPassThroughCollisions);
-        }
+        
+        m_ignoringPassThroughCollisions = ignorePassThroughCollisions;
+        OnIgnorePassThroughCollisionsChanged(m_ignoringPassThroughCollisions);
 
         if (m_isDying)
         {
@@ -74,8 +71,9 @@ public class PlatformingEntitiesManager : MonoBehaviour
         {
             foreach (PassThroughPlatform platform in m_passThroughPlatforms)
             {
+                bool specificIgnore = transform.position.y < platform.transform.position.y;
                 Collider2D collider = platform.GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(m_collider, collider, ignore);
+                Physics2D.IgnoreCollision(m_collider, collider, ignore || specificIgnore);
             }
         }
     }
