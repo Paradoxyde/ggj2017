@@ -17,29 +17,16 @@ public class LightPhaseColorComponent : WaveComponent
     {
         base.Start();
         m_Light = GetComponent<Light>();
-        Phase phase = WaveManager.Instance.CurrentPhase;
-        m_Light.color = phase.LightColor;
+        m_Light.color = WaveManager.Instance.CurrentColor;
     }
 
     public void Update()
     {
-        float remainingPhaseTime = WaveManager.Instance.PhaseRemaingTime;
-        if (remainingPhaseTime <= m_MaximumTransitionTime)
-        {
-            Phase nextPhase = WaveManager.Instance.NextPhase;
-
-            Color c0 = m_Light.color, c1 = nextPhase.LightColor;
-            c0.a = Mathf.SmoothDamp(c0.a, c1.a, ref m_SmoothVelocityA, remainingPhaseTime);
-            c0.r = Mathf.SmoothDamp(c0.r, c1.r, ref m_SmoothVelocityR, remainingPhaseTime);
-            c0.g = Mathf.SmoothDamp(c0.g, c1.g, ref m_SmoothVelocityG, remainingPhaseTime);
-            c0.b = Mathf.SmoothDamp(c0.b, c1.b, ref m_SmoothVelocityB, remainingPhaseTime);
-
-            m_Light.color = c0;
-        }
+        m_Light.color = WaveManager.Instance.CurrentColor;
     }
 
     public override void OnPhaseChanged(Phase phase)
     {
-        m_Light.color = phase.LightColor;
+        m_Light.color = WaveManager.Instance.CurrentColor;
     }
 }

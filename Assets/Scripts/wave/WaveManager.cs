@@ -13,10 +13,13 @@ public class WaveManager : MonoBehaviour
     public Phase CurrentPhase { get { return Phases[m_PhaseIndex]; } }
     public Phase NextPhase { get { int i = m_PhaseIndex + 1; if (i >= Phases.Count) i = 0; return Phases[i]; } }
     public float CycleSinValue { get; private set; }
+    public float CycleAngle { get; private set; }
     public float CycleProgress { get; private set; }
     public float PhaseProgress { get { return Mathf.Min(m_PhaseElapsedTime / CurrentPhase.PeriodInSeconds, 1.0f); } }
     public float PhaseRemaingTime { get { return Mathf.Max(CurrentPhase.PeriodInSeconds - m_PhaseElapsedTime, 0.0f); } }
     public float PhaseElapsedTime { get { return m_PhaseElapsedTime; } }
+
+    public float ColorTransitionRatio = 0.05f;
 
     private int m_AudioClipIndex = 0;
     private int m_PhaseIndex = 0;
@@ -28,6 +31,49 @@ public class WaveManager : MonoBehaviour
     private AudioSource m_AudioSourceCache;
 
     public void Register(WaveComponent waveComponent) { m_WaveComponents.Add(waveComponent); }
+
+    public Color GetColorAt(float cycleRatio)
+    {
+        float tolerance = ColorTransitionRatio;
+        Color color;
+
+        if (IsWithinTolerance(cycleRatio, 0.0625f, tolerance))
+            color = FadeTo(GetPhaseColor(3), GetPhaseColor(0), cycleRatio, 0.0625f, tolerance);
+        else if (IsWithinTolerance(cycleRatio, 0.4375f, tolerance))
+            color = FadeTo(GetPhaseColor(0), GetPhaseColor(1), cycleRatio, 0.4375f, tolerance);
+        else if (IsWithinTolerance(cycleRatio, 0.5625f, tolerance))
+            color = FadeTo(GetPhaseColor(1), GetPhaseColor(2), cycleRatio, 0.5625f, tolerance);
+        else if (IsWithinTolerance(cycleRatio, 0.9375f, tolerance))
+            color = FadeTo(GetPhaseColor(2), GetPhaseColor(3), cycleRatio, 0.9375f, tolerance);
+        else if (cycleRatio < 0.0625f || cycleRatio > 0.9375f)
+            color = GetPhaseColor(3);
+        else if (cycleRatio > 0.4375f && cycleRatio < 0.5625f)
+            color = GetPhaseColor(1);
+        else if (cycleRatio < 0.5f)
+            color = GetPhaseColor(0);
+        else
+            color = GetPhaseColor(2);
+
+        return color;
+    }
+    
+    bool IsWithinTolerance(float x, float point, float tolerance)
+    {
+        return x < (point + tolerance) && x > (point - tolerance);
+    }
+
+    Color FadeTo(Color from, Color to, float v, float point, float tolerance)
+    {
+        float t = (v - point + tolerance) / (tolerance * 2.0f);
+        return Color.Lerp(from, to, t);
+    }
+
+    Color GetPhaseColor(int index)
+    {
+        return Phases[index].LightColor;
+    }
+
+    public Color CurrentColor { get { return GetColorAt(CycleProgress); } }
 
     void Awake()
     {
@@ -46,7 +92,6 @@ public class WaveManager : MonoBehaviour
         m_AudioClipIndex = -1;
 
         m_AudioSourceCache = GetComponent<AudioSource>();
-        m_AudioSourceCache.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
     }
 
     void Update()
@@ -73,9 +118,9 @@ public class WaveManager : MonoBehaviour
         if (m_CycleElapsedTime > m_CycleTimeInSeconds)
             m_CycleElapsedTime -= m_CycleTimeInSeconds;
 
-        CycleProgress = m_CycleTimeInSeconds / m_CycleElapsedTime;
-        float radElapsed = Mathf.PI * 2.0f * CycleProgress;
-        CycleSinValue = Mathf.Sin(radElapsed);
+        CycleProgress = m_CycleElapsedTime / m_CycleTimeInSeconds;
+        CycleAngle = Mathf.PI * 2.0f * CycleProgress;
+        CycleSinValue = Mathf.Sin(CycleAngle);
 
         if (m_PhaseElapsedTime >= currentPhase.PeriodInSeconds)
         {

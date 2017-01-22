@@ -11,8 +11,8 @@ public class ParticleAutoDestroy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
-        if (ps && ps.isStopped)
+        ParticleSystem ps = GetComponent<ParticleSystem>();
+        if (ps.isStopped)
         {
             GameObject.Destroy(this);
         }
