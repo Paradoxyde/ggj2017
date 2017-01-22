@@ -41,14 +41,24 @@ public class ColoredPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("playerkillintersect"))
+        if (collision.collider.CompareTag("Player"))
         {
-            GameObject go = GameObject.FindGameObjectWithTag("Player");
+            GameObject playerGO = collision.collider.gameObject;
+            Transform childTran = playerGO.transform.FindChild("killintersectvolume");
+            
+            Collider2D thisCol = GetComponent<Collider2D>();
 
-            if (go)
+            Vector3 playerPos = playerGO.transform.position;
+            Collider2D[] colliders = Physics2D.OverlapCapsuleAll(playerPos, new Vector2(0.85f, 1.0f), CapsuleDirection2D.Vertical, 0.0f);
+
+            foreach(Collider2D col in colliders)
             {
-                PlatformingEntitiesManager pem = go.GetComponent<PlatformingEntitiesManager>();
-                pem.OnPlayerDied();
+                if (col == thisCol)
+                {
+                    PlatformingEntitiesManager pem = collision.collider.gameObject.GetComponent<PlatformingEntitiesManager>();
+                    pem.OnPlayerDied();
+                    return;
+                }
             }
         }
     }

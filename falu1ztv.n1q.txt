@@ -1,0 +1,201 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+# Conflicts:
+#	Assets/Scripts/MainCharacterController.cs
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 7 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	new file:   Assets/3D.meta
+#	new file:   Assets/3D/Anim.meta
+#	new file:   Assets/3D/Anim/Idle.FBX
+#	new file:   Assets/3D/Anim/Idle.FBX.meta
+#	new file:   Assets/3D/Anim/PhaseGirl Controller.controller
+#	new file:   Assets/3D/Anim/PhaseGirl Controller.controller.meta
+#	new file:   Assets/3D/Materials.meta
+#	renamed:    Assets/Textures/Plante_test.mat -> Assets/3D/Materials/DetailMap.mat
+#	renamed:    Assets/Prefabs/Environments/Plante_test.prefab.meta -> Assets/3D/Materials/DetailMap.mat.meta
+#	new file:   Assets/3D/Materials/DiiffuseNew.mat
+#	new file:   Assets/3D/Materials/DiiffuseNew.mat.meta
+#	new file:   Assets/3D/Materials/default.mat
+#	new file:   Assets/3D/Materials/default.mat.meta
+#	new file:   Assets/3D/PhaseGirl_GameMesh.FBX
+#	new file:   Assets/3D/PhaseGirl_GameMesh.FBX.meta
+#	new file:   Assets/3D/Textures.meta
+#	new file:   Assets/3D/Textures/DetailMap.png
+#	new file:   Assets/3D/Textures/DetailMap.png.meta
+#	new file:   Assets/3D/Textures/DetailMapRed.png
+#	new file:   Assets/3D/Textures/DetailMapRed.png.meta
+#	new file:   Assets/3D/Textures/DetailMapWhite.png
+#	new file:   Assets/3D/Textures/DetailMapWhite.png.meta
+#	new file:   Assets/3D/Textures/DiiffuseNew.png
+#	new file:   Assets/3D/Textures/DiiffuseNew.png.meta
+#	new file:   Assets/3D/Textures/DiiffuseNewRed.png
+#	new file:   Assets/3D/Textures/DiiffuseNewRed.png.meta
+#	new file:   Assets/3D/Textures/DiiffuseNewWhite.png
+#	new file:   Assets/3D/Textures/DiiffuseNewWhite.png.meta
+#	new file:   Assets/Materials/Background.mat
+#	new file:   Assets/Materials/Background.mat.meta
+#	new file:   Assets/Prefabs/Environments/Algue1 BG.prefab
+#	new file:   Assets/Prefabs/Environments/Algue1 BG.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Algue1 FG.prefab
+#	new file:   Assets/Prefabs/Environments/Algue1 FG.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Algue1.prefab
+#	new file:   Assets/Prefabs/Environments/Algue1.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Algue2.prefab
+#	new file:   Assets/Prefabs/Environments/Algue2.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Algue3.prefab
+#	new file:   Assets/Prefabs/Environments/Algue3.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Plante_test with bones.prefab
+#	new file:   Assets/Prefabs/Environments/Plante_test with bones.prefab.meta
+#	renamed:    Assets/Prefabs/Environments/Plante_test.prefab -> Assets/Prefabs/Environments/Roche1.prefab
+#	new file:   Assets/Prefabs/Environments/Roche1.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Roche2.prefab
+#	new file:   Assets/Prefabs/Environments/Roche2.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Roche3.prefab
+#	new file:   Assets/Prefabs/Environments/Roche3.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Roche4.prefab
+#	new file:   Assets/Prefabs/Environments/Roche4.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Roche5.prefab
+#	new file:   Assets/Prefabs/Environments/Roche5.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Roche6.prefab
+#	new file:   Assets/Prefabs/Environments/Roche6.prefab.meta
+#	new file:   Assets/Prefabs/Environments/Roche7.prefab
+#	new file:   Assets/Prefabs/Environments/Roche7.prefab.meta
+#	modified:   Assets/Scenes/LDstuff.unity
+#	modified:   Assets/Scenes/testEmery.unity
+#	modified:   Assets/Scripts/MainCharacterController.cs
+#	modified:   Assets/Scripts/MeshDeformation/BoneLeaf.cs
+#	modified:   Assets/Scripts/MeshDeformation/BonedMeshDeformer.cs
+#	new file:   Assets/TSF.meta
+#	new file:   Assets/TSF/Animations.meta
+#	new file:   Assets/TSF/Animations/samba_dancing_1.anim
+#	new file:   Assets/TSF/Animations/samba_dancing_1.anim.meta
+#	new file:   Assets/TSF/Audio.meta
+#	new file:   Assets/TSF/Audio/tsf.aif
+#	new file:   Assets/TSF/Audio/tsf.aif.meta
+#	new file:   Assets/TSF/Materials.meta
+#	new file:   Assets/TSF/Materials/Body.mat
+#	new file:   Assets/TSF/Materials/Body.mat.meta
+#	new file:   Assets/TSF/Materials/EyeWhite.mat
+#	new file:   Assets/TSF/Materials/EyeWhite.mat.meta
+#	new file:   Assets/TSF/Materials/Pupils.mat
+#	new file:   Assets/TSF/Materials/Pupils.mat.meta
+#	new file:   Assets/TSF/Materials/lambert1.mat
+#	new file:   Assets/TSF/Materials/lambert1.mat.meta
+#	new file:   Assets/TSF/Materials/rampMat.mat
+#	new file:   Assets/TSF/Materials/rampMat.mat.meta
+#	new file:   Assets/TSF/Models.meta
+#	new file:   Assets/TSF/Models/Mascot@samba_dancing_1.fbx
+#	new file:   Assets/TSF/Models/Mascot@samba_dancing_1.fbx.meta
+#	new file:   Assets/TSF/Models/STAGE.obj
+#	new file:   Assets/TSF/Models/STAGE.obj.meta
+#	new file:   Assets/TSF/Models/ramps.fbx
+#	new file:   Assets/TSF/Models/ramps.fbx.meta
+#	new file:   Assets/TSF/Scenes.meta
+#	new file:   Assets/TSF/Scenes/stage.unity
+#	new file:   Assets/TSF/Scenes/stage.unity.meta
+#	new file:   Assets/TSF/Shaders.meta
+#	new file:   Assets/TSF/Shaders/TSF.shader
+#	new file:   Assets/TSF/Shaders/TSF.shader.meta
+#	new file:   Assets/TSF/Shaders/TSFOutline.shader
+#	new file:   Assets/TSF/Shaders/TSFOutline.shader.meta
+#	new file:   Assets/TSF/Textures.meta
+#	new file:   Assets/TSF/Textures/MatCap_Toon3R.psd
+#	new file:   Assets/TSF/Textures/MatCap_Toon3R.psd.meta
+#	new file:   Assets/TSF/Textures/MatCap_Toon4.png
+#	new file:   Assets/TSF/Textures/MatCap_Toon4.png.meta
+#	new file:   Assets/TSF/Textures/MatCap_Toon4R.psd
+#	new file:   Assets/TSF/Textures/MatCap_Toon4R.psd.meta
+#	new file:   Assets/TSF/Textures/MatCap_Toon5R.psd
+#	new file:   Assets/TSF/Textures/MatCap_Toon5R.psd.meta
+#	new file:   Assets/Textures/Algue1.png
+#	new file:   Assets/Textures/Algue1.png.meta
+#	new file:   Assets/Textures/Algue2.png
+#	new file:   Assets/Textures/Algue2.png.meta
+#	new file:   Assets/Textures/Algue3.png
+#	new file:   Assets/Textures/Algue3.png.meta
+#	new file:   Assets/Textures/Algue4.png
+#	new file:   Assets/Textures/Algue4.png.meta
+#	new file:   Assets/Textures/Algue5.png
+#	new file:   Assets/Textures/Algue5.png.meta
+#	new file:   Assets/Textures/Algue6.png
+#	new file:   Assets/Textures/Algue6.png.meta
+#	new file:   Assets/Textures/Algue7.png
+#	new file:   Assets/Textures/Algue7.png.meta
+#	new file:   Assets/Textures/Algue8.png
+#	new file:   Assets/Textures/Algue8.png.meta
+#	new file:   Assets/Textures/Background.png
+#	new file:   Assets/Textures/Background.png.meta
+#	new file:   Assets/Textures/Materials.meta
+#	new file:   Assets/Textures/Materials/Algue1.mat
+#	new file:   Assets/Textures/Materials/Algue1.mat.meta
+#	new file:   Assets/Textures/Materials/Algue1BG.mat
+#	new file:   Assets/Textures/Materials/Algue1BG.mat.meta
+#	new file:   Assets/Textures/Materials/Algue1FG.mat
+#	new file:   Assets/Textures/Materials/Algue1FG.mat.meta
+#	new file:   Assets/Textures/Materials/Algue2.mat
+#	new file:   Assets/Textures/Materials/Algue2.mat.meta
+#	new file:   Assets/Textures/Materials/Algue2BG.mat
+#	new file:   Assets/Textures/Materials/Algue2BG.mat.meta
+#	new file:   Assets/Textures/Materials/Algue3.mat
+#	new file:   Assets/Textures/Materials/Algue3.mat.meta
+#	new file:   Assets/Textures/Materials/Plante_test.mat
+#	renamed:    Assets/Textures/Plante_test.mat.meta -> Assets/Textures/Materials/Plante_test.mat.meta
+#	new file:   Assets/Textures/Materials/Roche1.mat
+#	new file:   Assets/Textures/Materials/Roche1.mat.meta
+#	new file:   Assets/Textures/Materials/Roche2.mat
+#	new file:   Assets/Textures/Materials/Roche2.mat.meta
+#	new file:   Assets/Textures/Materials/Roche3.mat
+#	new file:   Assets/Textures/Materials/Roche3.mat.meta
+#	new file:   Assets/Textures/Materials/Roche4.mat
+#	new file:   Assets/Textures/Materials/Roche4.mat.meta
+#	new file:   Assets/Textures/Materials/Roche5.mat
+#	new file:   Assets/Textures/Materials/Roche5.mat.meta
+#	new file:   Assets/Textures/Materials/Roche6.mat
+#	new file:   Assets/Textures/Materials/Roche6.mat.meta
+#	new file:   Assets/Textures/Materials/Roche7.mat
+#	new file:   Assets/Textures/Materials/Roche7.mat.meta
+#	new file:   Assets/Textures/Plateforme1.png
+#	new file:   Assets/Textures/Plateforme1.png.meta
+#	new file:   Assets/Textures/Plateforme2.png
+#	new file:   Assets/Textures/Plateforme2.png.meta
+#	new file:   Assets/Textures/Plateforme3.png
+#	new file:   Assets/Textures/Plateforme3.png.meta
+#	new file:   Assets/Textures/Plateforme4.png
+#	new file:   Assets/Textures/Plateforme4.png.meta
+#	new file:   Assets/Textures/Plateforme_roche1.png
+#	new file:   Assets/Textures/Plateforme_roche1.png.meta
+#	new file:   Assets/Textures/Plateforme_roche2.png
+#	new file:   Assets/Textures/Plateforme_roche2.png.meta
+#	new file:   Assets/Textures/Plateforme_roche3.png
+#	new file:   Assets/Textures/Plateforme_roche3.png.meta
+#	new file:   Assets/Textures/Roche1.png
+#	new file:   Assets/Textures/Roche1.png.meta
+#	new file:   Assets/Textures/Roche2.png
+#	new file:   Assets/Textures/Roche2.png.meta
+#	new file:   Assets/Textures/Roche3.png
+#	new file:   Assets/Textures/Roche3.png.meta
+#	new file:   Assets/Textures/Roche4.png
+#	new file:   Assets/Textures/Roche4.png.meta
+#	new file:   Assets/Textures/Roche5.png
+#	new file:   Assets/Textures/Roche5.png.meta
+#	new file:   Assets/Textures/Roche6.png
+#	new file:   Assets/Textures/Roche6.png.meta
+#	new file:   Assets/Textures/Roche7.png
+#	new file:   Assets/Textures/Roche7.png.meta
+#
+

@@ -62,27 +62,36 @@ public class TextureWaveForm : WaveFormComponent
 
     public override void UpdateWaveMean(float mean)
     {
-        m_MeanAmplitude = (m_MeanAmplitude + mean) * 0.5f;
-        m_SampleHistory[m_WriteHead] = Mathf.Log(mean / m_MeanAmplitude) * m_AmplitudeMultiplier;
-        float abs = Mathf.Abs(m_SampleHistory[m_WriteHead]);
+        //m_MeanAmplitude = (m_MeanAmplitude + mean) * 0.5f;
+        //m_SampleHistory[m_WriteHead] = Mathf.Log(mean / m_MeanAmplitude) * m_AmplitudeMultiplier;
+        //float abs = Mathf.Abs(m_SampleHistory[m_WriteHead]);
 
-        if (abs < m_DbFilter)
-        {
-            m_SampleHistory[m_WriteHead] = 0.0f;
-        }
-        else
-        {
-            if (m_UseAmplitudeAbsolute)
-                m_SampleHistory[m_WriteHead] = abs;
+        //if (abs < m_DbFilter)
+        //{
+        //    m_SampleHistory[m_WriteHead] = 0.0f;
+        //}
+        //else
+        //{
+        //    if (m_UseAmplitudeAbsolute)
+        //        m_SampleHistory[m_WriteHead] = abs;
 
-            int previousEntry = m_WriteHead - 1;
-            if (previousEntry < 0)
-                previousEntry = m_SampleHistory.Length - 1;
+        //    int previousEntry = m_WriteHead - 1;
+        //    if (previousEntry < 0)
+        //        previousEntry = m_SampleHistory.Length - 1;
 
-            if (m_UseAmplitudeDropDampening && m_SampleHistory[m_WriteHead] < m_SampleHistory[previousEntry])
-                m_SampleHistory[m_WriteHead] = Mathf.SmoothDamp(m_SampleHistory[previousEntry], m_SampleHistory[m_WriteHead], ref m_SmoothVelocity, m_SmoothTime);
-        }
+        //    if (m_UseAmplitudeDropDampening && m_SampleHistory[m_WriteHead] < m_SampleHistory[previousEntry])
+        //        m_SampleHistory[m_WriteHead] = Mathf.SmoothDamp(m_SampleHistory[previousEntry], m_SampleHistory[m_WriteHead], ref m_SmoothVelocity, m_SmoothTime);
+        //}
         
+        //++m_WriteHead;
+        //if (m_WriteHead >= m_SampleHistory.Length)
+        //    m_WriteHead = 0;
+    }
+
+
+    public override void UpdateAudioOutput(float mean)
+    {
+        m_SampleHistory[m_WriteHead] = mean * m_AmplitudeMultiplier;
         ++m_WriteHead;
         if (m_WriteHead >= m_SampleHistory.Length)
             m_WriteHead = 0;

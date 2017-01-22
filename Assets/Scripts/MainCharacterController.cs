@@ -40,6 +40,7 @@ public class MainCharacterController : MonoBehaviour
 
 
     Vector2 m_moveInput = new Vector2();
+    bool m_lastInputWasRight = true;
     bool m_jumpHeld = false;
     bool m_isFreshJumpPress = true;
     float m_timeSinceJumpPress = 0.0f;
@@ -90,10 +91,14 @@ public class MainCharacterController : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_platformingEntities = GetComponent<PlatformingEntitiesManager>();
         m_animator = GetComponentInChildren<Animator>();
-        m_visualsTransform = m_animator.transform.parent;
+
+        if (m_animator != null)
+            m_visualsTransform = m_animator.transform.parent;
+
         m_baseGravityScale = m_rigidBody.gravityScale;
 
-        m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
+        if (m_visualsTransform != null)
+            m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
     }
 	
 	void Update()
@@ -127,13 +132,20 @@ public class MainCharacterController : MonoBehaviour
     {
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        if (Mathf.Abs(m_moveInput.x) > 0.05f)
+        {
+            m_lastInputWasRight = m_moveInput.x >= 0;
+        }
+
         if (m_moveInput.x > 0f)
         {
-            m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
+            if (m_visualsTransform != null)
+                m_visualsTransform.LookAt(m_visualsTransform.position - Vector3.right);
         }
         else if (m_moveInput.x < 0f)
         {
-            m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
+            if (m_visualsTransform != null)
+                m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
         }
 
         if (m_moveInput.x != 0)
@@ -388,7 +400,22 @@ public class MainCharacterController : MonoBehaviour
                 m_isDashAvailabe = false;
                 m_timeSinceLastDashStart = 0.0f;
                 m_isFreshDashPress = false;
-                m_dashingDirection = m_moveInput.normalized;
+
+                if (m_moveInput.sqrMagnitude > 0.01f)
+                {
+                    m_dashingDirection = m_moveInput.normalized;
+                }
+                else
+                {
+                    if (m_lastInputWasRight)
+                    {
+                        m_dashingDirection = new Vector2(1.0f, 0.0f);
+                    }
+                    else
+                    {
+                        m_dashingDirection = new Vector2(-1.0f, 0.0f);
+                    }
+                }
 
                 float dashingAngle = Mathf.Atan2(m_dashingDirection.y, m_dashingDirection.x) * Mathf.Rad2Deg;
                 if (dashingAngle >= 90 && dashingAngle < 180 - max_dashing_angle)
