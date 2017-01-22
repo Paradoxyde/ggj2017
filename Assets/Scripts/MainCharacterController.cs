@@ -187,7 +187,7 @@ public class MainCharacterController : MonoBehaviour
             m_animator.SetBool("IsRunning", false);
         }
 
-        if (Input.GetButtonDown("Ghost"))
+        /*if (Input.GetButtonDown("Ghost"))
         {
             m_isGhosting = !m_isGhosting; // [REMOVE]
             m_animator.SetBool("IsGhosting", m_isGhosting);
@@ -217,7 +217,7 @@ public class MainCharacterController : MonoBehaviour
                 Collider2D col = GetComponent<Collider2D>();
                 col.enabled = true;
             }
-        }
+        */
 
         bool jumpHeld = Input.GetButton("Jump");
         if (jumpHeld)
