@@ -10,6 +10,8 @@ public class ColoredPlatform : MonoBehaviour
     public float fadeDamping = 2f;
     public Material opaqueMat;
     public Material fadeMat;
+    public Renderer renderer;
+    private Texture m_texture;
 
     bool m_isActive = true;
     Collider2D m_collider;
@@ -19,7 +21,14 @@ public class ColoredPlatform : MonoBehaviour
     void Start()
     {
         m_collider = GetComponent<Collider2D>();
-        m_renderer = GetComponent<Renderer>();
+
+        if (renderer)
+        {
+            m_renderer = renderer;
+            m_texture = m_renderer.material.mainTexture;
+        }
+        else
+            m_renderer = GetComponent<Renderer>();
 
         ApplyColor();
     }
@@ -41,6 +50,7 @@ public class ColoredPlatform : MonoBehaviour
             {
                 m_renderer.material = fadeMat;
             }
+            m_renderer.material.mainTexture = m_texture;
 
             ApplyColor();
         }
