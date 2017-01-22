@@ -17,7 +17,7 @@ public class ColoredPlatform : MonoBehaviour
         {
             Helpers.MakeRed(gameObject);
         }
-        else
+        else if (phase_type == PhaseType.Blue)
         {
             Helpers.MakeBlue(gameObject);
         }
