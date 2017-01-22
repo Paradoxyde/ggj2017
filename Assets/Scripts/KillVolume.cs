@@ -29,7 +29,7 @@ public class KillVolume : MonoBehaviour
 
             if (go)
             {
-                if (phase_type == WaveManager.Instance.CurrentPhase.phase_type)
+                if (phase_type == PhaseType.Neutral || phase_type == WaveManager.Instance.CurrentPhase.phase_type)
                 {
                     PlatformingEntitiesManager pem = go.GetComponent<PlatformingEntitiesManager>();
                     pem.OnPlayerDied();
