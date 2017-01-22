@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemyFiringBehavior : MonoBehaviour
 {
+    public bool invisible_at_runtime = true;
     public Target target = Target.forward;
     public GameObject projectile;
     public float delay_between_shots = 3.0f;
     public float player_target_range = 15.0f;
     public PhaseType phase_type = PhaseType.Neutral;
+
+    public Transform red_particles;
+    public Transform blue_particles;
+    public Transform neutral_particles;
+    Transform childParticles;
 
     float m_shotCooldown = 0.0f;
     bool m_inRange = true;
@@ -21,17 +27,48 @@ public class EnemyFiringBehavior : MonoBehaviour
 
 	void Start ()
     {
+        if (invisible_at_runtime)
+        {
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
+        }
+
         if (phase_type == PhaseType.Red)
         {
             Helpers.MakeRed(gameObject);
+            SetParticles(red_particles);
         }
         else if (phase_type == PhaseType.Blue)
         {
             Helpers.MakeBlue(gameObject);
+            SetParticles(blue_particles);
+        }
+        else
+        {
+            SetParticles(neutral_particles);
         }
     }
-	
-	void Update ()
+
+    private void SetParticles(Transform ps)
+    {
+        if (childParticles != null)
+        {
+            GameObject.Destroy(childParticles);
+        }
+
+        childParticles = GameObject.Instantiate(ps, transform.position, ps.rotation);
+        
+        Vector3 pos = childParticles.position;
+        pos += transform.rotation * new Vector3(0, -1.5f, 0);
+        childParticles.position = pos;
+        childParticles.rotation = Quaternion.LookRotation(transform.position - childParticles.position, new Vector3(0, 0, -1));
+        childParticles.SetParent(transform);
+    }
+
+    void Update ()
     {
         if (target == Target.player)
         {
@@ -41,19 +78,13 @@ public class EnemyFiringBehavior : MonoBehaviour
             {
                 Vector3 playerPos = go.transform.position;
                 Vector3 localPos = transform.position;
-                
-                if ((playerPos - localPos).sqrMagnitude < player_target_range * player_target_range)
-                {
-                    m_inRange = true;
-                    float angleToPlayer = Mathf.Atan2(playerPos.y - localPos.y, playerPos.x - localPos.x);
-                    Vector3 eulerAngles = transform.eulerAngles;
-                    eulerAngles.z = angleToPlayer * Mathf.Rad2Deg - 90.0f;
-                    transform.eulerAngles = eulerAngles;
-                }
-                else
-                {
-                    m_inRange = false;
-                }
+
+                m_inRange = (playerPos - localPos).sqrMagnitude < player_target_range * player_target_range;
+
+                float angleToPlayer = Mathf.Atan2(playerPos.y - localPos.y, playerPos.x - localPos.x);
+                Vector3 eulerAngles = transform.eulerAngles;
+                eulerAngles.z = angleToPlayer * Mathf.Rad2Deg - 90.0f;
+                transform.eulerAngles = eulerAngles;
             }
         }
         else

@@ -18,6 +18,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
     bool m_isDying = false;
     float m_deathDuration = 1.0f;
     float m_deathTimer = 0.0f;
+    AirJumpHook m_previousClosestHook;
 
     void Start()
     {
@@ -28,8 +29,8 @@ public class PlatformingEntitiesManager : MonoBehaviour
         m_collider = GetComponent<Collider2D>();
         m_initialPlayerPosition = transform.position;
     }
-	
-	void Update()
+
+    void Update()
     {
         float playerVerVel = m_rigidBody.velocity.y;
 
@@ -41,12 +42,9 @@ public class PlatformingEntitiesManager : MonoBehaviour
             MainCharacterController controller = go.GetComponent<MainCharacterController>();
             ignorePassThroughCollisions |= controller.GetShouldGoThroughTwoWayPlatforms();
         }
-
-        if (m_ignoringPassThroughCollisions != ignorePassThroughCollisions)
-        {
-            m_ignoringPassThroughCollisions = ignorePassThroughCollisions;
-            OnIgnorePassThroughCollisionsChanged(m_ignoringPassThroughCollisions);
-        }
+        
+        m_ignoringPassThroughCollisions = ignorePassThroughCollisions;
+        OnIgnorePassThroughCollisionsChanged(m_ignoringPassThroughCollisions);
 
         if (m_isDying)
         {
@@ -63,7 +61,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
                 m_isDying = false;
             }
         }
-	}
+    }
 
     private void OnIgnorePassThroughCollisionsChanged(bool ignore)
     {
@@ -73,12 +71,13 @@ public class PlatformingEntitiesManager : MonoBehaviour
         {
             foreach (PassThroughPlatform platform in m_passThroughPlatforms)
             {
+                bool specificIgnore = transform.position.y < platform.transform.position.y;
                 Collider2D collider = platform.GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(m_collider, collider, ignore);
+                Physics2D.IgnoreCollision(m_collider, collider, ignore || specificIgnore);
             }
         }
     }
-    
+
     public void RegisterAirJumpHook(AirJumpHook hook)
     {
         m_airJumpHooks.Add(hook);
@@ -91,7 +90,7 @@ public class PlatformingEntitiesManager : MonoBehaviour
 
     public void RegisterCheckpoint(Checkpoint checkpoint)
     {
-        foreach(Checkpoint c in m_checkpoints)
+        foreach (Checkpoint c in m_checkpoints)
         {
             if (checkpoint.checkpoint_index == c.checkpoint_index)
             {
@@ -131,8 +130,8 @@ public class PlatformingEntitiesManager : MonoBehaviour
         float rangeSq = range * range;
         AirJumpHook closestHook = null;
         float closestRangeSq = float.MaxValue;
-        
-        foreach(AirJumpHook hook in m_airJumpHooks)
+
+        foreach (AirJumpHook hook in m_airJumpHooks)
         {
             float distanceSq = (position - hook.transform.position).sqrMagnitude;
             if (hook.IsAvailable() && distanceSq < rangeSq && distanceSq < closestRangeSq)
@@ -141,6 +140,17 @@ public class PlatformingEntitiesManager : MonoBehaviour
                 closestHook = hook;
             }
         }
+
+        if (m_previousClosestHook != null && m_previousClosestHook != closestHook)
+        {
+            m_previousClosestHook.OnClosestChanged(false);
+        }
+
+        if (closestHook != null && m_previousClosestHook != closestHook)
+        {
+            closestHook.OnClosestChanged(true);
+        }
+        m_previousClosestHook = closestHook;
 
         return closestHook;
     }

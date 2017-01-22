@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class WaveManager : MonoBehaviour
@@ -96,18 +97,18 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        m_AudioSourceCache.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        //m_AudioSourceCache.volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
 
         // Play audio clip.
-        if (!m_AudioSourceCache.isPlaying)
-        {
-            m_AudioClipIndex++;
-            if (m_AudioClipIndex >= m_AudioClips.Count)
-                m_AudioClipIndex = 0;
+        //if (!m_AudioSourceCache.isPlaying)
+        //{
+        //    m_AudioClipIndex++;
+        //    if (m_AudioClipIndex >= m_AudioClips.Count)
+        //        m_AudioClipIndex = 0;
 
-            m_AudioSourceCache.clip = m_AudioClips[m_AudioClipIndex];
-            m_AudioSourceCache.Play();
-        }
+        //    m_AudioSourceCache.clip = m_AudioClips[m_AudioClipIndex];
+        //    m_AudioSourceCache.Play();
+        //}
 
         Phase currentPhase = CurrentPhase;
 
@@ -137,5 +138,10 @@ public class WaveManager : MonoBehaviour
                 waveComponent.OnPhaseChanged(Phases[m_PhaseIndex]);
             }
         }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("LDstuff");
     }
 }
