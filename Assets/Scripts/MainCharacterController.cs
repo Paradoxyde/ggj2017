@@ -125,6 +125,8 @@ public class MainCharacterController : MonoBehaviour
         m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, wall_check_layers);
         m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
 
+        if (m_isGrounded) m_airJumpCount = 0;
+
         m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
 
@@ -177,10 +179,15 @@ public class MainCharacterController : MonoBehaviour
                 m_airJumpCount = 0;
                 m_isHuggingWall = false;
                 m_airJumpHook = null;
+
+                Collider2D col = GetComponent<Collider2D>();
+                col.enabled = false;
             }
             else
             {
                 m_rigidBody.gravityScale = m_baseGravityScale;
+                Collider2D col = GetComponent<Collider2D>();
+                col.enabled = true;
             }
         }
 
@@ -225,7 +232,7 @@ public class MainCharacterController : MonoBehaviour
 
     void UpdateGhosting()
     {
-        float ghostSpeed = 20.0f;
+        float ghostSpeed = 40.0f;
         Vector3 position = transform.position;
         position.x += m_moveInput.x * ghostSpeed * Time.deltaTime;
         position.y += m_moveInput.y * ghostSpeed * Time.deltaTime;
