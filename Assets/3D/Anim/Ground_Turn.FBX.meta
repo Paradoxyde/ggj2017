@@ -1,0 +1,279 @@
+fileFormatVersion: 2
+guid: 2c11d5ed1d8a76f4fbccc10c94214929
+timeCreated: 1485074507
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: AddonGeometry
+    100002: Bone002
+    100004: Bone002(mirrored)
+    100006: Eyes00
+    100008: Eyes01
+    100010: Eyes02
+    100012: Eyes03
+    100014: Eyes04
+    100016: Eyes05
+    100018: Eyes06
+    100020: Eyes07
+    100022: Eyes08
+    100024: Eyes09
+    100026: //RootNode
+    100028: Hair
+    100030: L_Wing00
+    100032: L_Wing01
+    100034: L_Wing02
+    100036: L_Wing03
+    100038: L_Wing04
+    100040: L_Wing05
+    100042: LeftHair
+    100044: Lips00
+    100046: Lips01
+    100048: Lips02
+    100050: Lips03
+    100052: Lips04
+    100054: Lips05
+    100056: Master
+    100058: Mouth
+    100060: PhaseGirl
+    100062: PhaseGirl Footsteps
+    100064: PhaseGirl Head
+    100066: PhaseGirl HeadNub
+    100068: PhaseGirl L Calf
+    100070: PhaseGirl L Clavicle
+    100072: PhaseGirl L Finger0
+    100074: PhaseGirl L Finger01
+    100076: PhaseGirl L Finger02
+    100078: PhaseGirl L Finger0Nub
+    100080: PhaseGirl L Finger1
+    100082: PhaseGirl L Finger11
+    100084: PhaseGirl L Finger12
+    100086: PhaseGirl L Finger1Nub
+    100088: PhaseGirl L Foot
+    100090: PhaseGirl L Forearm
+    100092: PhaseGirl L Hand
+    100094: PhaseGirl L Thigh
+    100096: PhaseGirl L Toe0
+    100098: PhaseGirl L Toe0Nub
+    100100: PhaseGirl L UpperArm
+    100102: PhaseGirl Neck
+    100104: PhaseGirl Pelvis
+    100106: PhaseGirl R Calf
+    100108: PhaseGirl R Clavicle
+    100110: PhaseGirl R Finger0
+    100112: PhaseGirl R Finger01
+    100114: PhaseGirl R Finger02
+    100116: PhaseGirl R Finger0Nub
+    100118: PhaseGirl R Finger1
+    100120: PhaseGirl R Finger11
+    100122: PhaseGirl R Finger12
+    100124: PhaseGirl R Finger1Nub
+    100126: PhaseGirl R Foot
+    100128: PhaseGirl R Forearm
+    100130: PhaseGirl R Hand
+    100132: PhaseGirl R Thigh
+    100134: PhaseGirl R Toe0
+    100136: PhaseGirl R Toe0Nub
+    100138: PhaseGirl R UpperArm
+    100140: PhaseGirl Spine
+    100142: PhaseGirl Spine1
+    100144: PhaseGirl Spine2
+    100146: PhaseGirl Spine3
+    100148: PhaseGirl_MeshPart0
+    100150: PhaseGirl_MeshPart1
+    100152: PhaseGirlp
+    100154: PhaseGirlp L ForeTwist
+    100156: PhaseGirlp LCalfTwist
+    100158: PhaseGirlp LThighTwist
+    100160: PhaseGirlp LUpArmTwist
+    100162: PhaseGirlp R ForeTwist
+    100164: PhaseGirlp RCalfTwist
+    100166: PhaseGirlp RThighTwist
+    100168: PhaseGirlp RUpArmTwist
+    100170: R_Hair
+    100172: R_Wing00
+    100174: R_Wing01
+    100176: R_Wing02
+    100178: R_Wing03
+    100180: R_Wing04
+    100182: R_Wing05
+    100184: Scarf00
+    100186: Scarf01
+    100188: Scarf02
+    100190: ScarfNub
+    100192: TopoSurface001
+    100194: TopoSurface002
+    400000: AddonGeometry
+    400002: Bone002
+    400004: Bone002(mirrored)
+    400006: Eyes00
+    400008: Eyes01
+    400010: Eyes02
+    400012: Eyes03
+    400014: Eyes04
+    400016: Eyes05
+    400018: Eyes06
+    400020: Eyes07
+    400022: Eyes08
+    400024: Eyes09
+    400026: //RootNode
+    400028: Hair
+    400030: L_Wing00
+    400032: L_Wing01
+    400034: L_Wing02
+    400036: L_Wing03
+    400038: L_Wing04
+    400040: L_Wing05
+    400042: LeftHair
+    400044: Lips00
+    400046: Lips01
+    400048: Lips02
+    400050: Lips03
+    400052: Lips04
+    400054: Lips05
+    400056: Master
+    400058: Mouth
+    400060: PhaseGirl
+    400062: PhaseGirl Footsteps
+    400064: PhaseGirl Head
+    400066: PhaseGirl HeadNub
+    400068: PhaseGirl L Calf
+    400070: PhaseGirl L Clavicle
+    400072: PhaseGirl L Finger0
+    400074: PhaseGirl L Finger01
+    400076: PhaseGirl L Finger02
+    400078: PhaseGirl L Finger0Nub
+    400080: PhaseGirl L Finger1
+    400082: PhaseGirl L Finger11
+    400084: PhaseGirl L Finger12
+    400086: PhaseGirl L Finger1Nub
+    400088: PhaseGirl L Foot
+    400090: PhaseGirl L Forearm
+    400092: PhaseGirl L Hand
+    400094: PhaseGirl L Thigh
+    400096: PhaseGirl L Toe0
+    400098: PhaseGirl L Toe0Nub
+    400100: PhaseGirl L UpperArm
+    400102: PhaseGirl Neck
+    400104: PhaseGirl Pelvis
+    400106: PhaseGirl R Calf
+    400108: PhaseGirl R Clavicle
+    400110: PhaseGirl R Finger0
+    400112: PhaseGirl R Finger01
+    400114: PhaseGirl R Finger02
+    400116: PhaseGirl R Finger0Nub
+    400118: PhaseGirl R Finger1
+    400120: PhaseGirl R Finger11
+    400122: PhaseGirl R Finger12
+    400124: PhaseGirl R Finger1Nub
+    400126: PhaseGirl R Foot
+    400128: PhaseGirl R Forearm
+    400130: PhaseGirl R Hand
+    400132: PhaseGirl R Thigh
+    400134: PhaseGirl R Toe0
+    400136: PhaseGirl R Toe0Nub
+    400138: PhaseGirl R UpperArm
+    400140: PhaseGirl Spine
+    400142: PhaseGirl Spine1
+    400144: PhaseGirl Spine2
+    400146: PhaseGirl Spine3
+    400148: PhaseGirl_MeshPart0
+    400150: PhaseGirl_MeshPart1
+    400152: PhaseGirlp
+    400154: PhaseGirlp L ForeTwist
+    400156: PhaseGirlp LCalfTwist
+    400158: PhaseGirlp LThighTwist
+    400160: PhaseGirlp LUpArmTwist
+    400162: PhaseGirlp R ForeTwist
+    400164: PhaseGirlp RCalfTwist
+    400166: PhaseGirlp RThighTwist
+    400168: PhaseGirlp RUpArmTwist
+    400170: R_Hair
+    400172: R_Wing00
+    400174: R_Wing01
+    400176: R_Wing02
+    400178: R_Wing03
+    400180: R_Wing04
+    400182: R_Wing05
+    400184: Scarf00
+    400186: Scarf01
+    400188: Scarf02
+    400190: ScarfNub
+    400192: TopoSurface001
+    400194: TopoSurface002
+    4300000: PhaseGirl_MeshPart0
+    4300002: PhaseGirl_MeshPart1
+    4300004: AddonGeometry
+    7400000: PhaseGirl_TurnOnSpot
+    9500000: //RootNode
+    13700000: AddonGeometry
+    13700002: PhaseGirl_MeshPart0
+    13700004: PhaseGirl_MeshPart1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

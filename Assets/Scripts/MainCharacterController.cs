@@ -121,11 +121,18 @@ public class MainCharacterController : MonoBehaviour
 
     void UpdateContacts()
     {
+        bool wasOnGround = m_isGrounded;
+
         m_isGrounded = Physics2D.OverlapCircle(feet_sensor_pos.position, ground_check_radius, ground_check_layers);
         m_hasLeftContact = Physics2D.OverlapCircle(left_sensor_pos.position, wall_check_radius, wall_check_layers);
         m_hasRightContact = Physics2D.OverlapCircle(right_sensor_pos.position, wall_check_radius, wall_check_layers);
-
+        
         if (m_isGrounded) m_airJumpCount = 0;
+
+        m_animator.SetBool("OnLand", m_isGrounded && !wasOnGround);
+        m_animator.SetBool("IsGrounded", m_isGrounded);
+        m_animator.SetBool("IsWallSliding", !m_isGrounded && m_isHuggingWall);
+        m_animator.SetBool("CanDoubleJump", m_airJumpCount != 0);
 
         m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
@@ -134,9 +141,14 @@ public class MainCharacterController : MonoBehaviour
     {
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+
         if (Mathf.Abs(m_moveInput.x) > 0.05f)
         {
-            m_lastInputWasRight = m_moveInput.x >= 0;
+            bool currentInputIsRight = m_moveInput.x >= 0;
+            
+            m_animator.SetBool("HasChangedDirection", currentInputIsRight != m_lastInputWasRight);
+
+            m_lastInputWasRight = currentInputIsRight;
         }
 
         if (m_moveInput.x > 0f)
@@ -162,7 +174,7 @@ public class MainCharacterController : MonoBehaviour
         if (Input.GetButtonDown("Ghost"))
         {
             m_isGhosting = !m_isGhosting; // [REMOVE]
-
+            m_animator.SetBool("IsGhosting", m_isGhosting);
             if (m_isGhosting)
             {
                 m_rigidBody.gravityScale = 0.0f;
@@ -312,6 +324,8 @@ public class MainCharacterController : MonoBehaviour
                     m_isJumping = true;
                     m_airJumpCount = 1;
                     m_jumpType = JumpType.first;
+
+                    m_animator.SetBool("OnJump", true);
                 }
                 else if (enable_wall_jump && m_isHuggingWall && currentVertSpeed <= 0.0f && m_timeHuggingWall > 0.1f)
                 {
@@ -336,6 +350,7 @@ public class MainCharacterController : MonoBehaviour
                     {
                         m_isDashAvailabe = true;
                     }
+                    m_animator.SetBool("OnJump", true);
                 }
                 else if (!m_isHuggingWall && ((m_airJumpCount < air_jumps && currentVertSpeed <= 0.0f) || m_airJumpHook != null))
                 {
@@ -352,10 +367,13 @@ public class MainCharacterController : MonoBehaviour
                         m_airJumpCount++;
                     }
                     m_jumpType = JumpType.air;
+                    m_animator.SetBool("OnJump", true);
                 }
             }
             else
             {
+                m_animator.SetBool("OnJump", false);
+
                 // Handle different jump heights
                 if (m_isJumping /*&& !m_hasLeftContact && !m_hasRightContact*/)
                 {
@@ -445,6 +463,8 @@ public class MainCharacterController : MonoBehaviour
                 m_dashingDirection.y = Mathf.Sin(dashingAngle * Mathf.Deg2Rad);
             }
         }
+        
+        m_animator.SetBool("OnDash", m_isDashing);
     }
     
     private void OnGUI()
