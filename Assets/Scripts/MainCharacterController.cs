@@ -35,6 +35,10 @@ public class MainCharacterController : MonoBehaviour
     public float max_dashing_duration = 0.30f;
     public float max_dashing_angle = 25.0f;
 
+    public float jump_shockwave_force = 50f;
+    public float jump_shockwave_radius = 6f;
+
+
     Vector2 m_moveInput = new Vector2();
     bool m_lastInputWasRight = true;
     bool m_jumpHeld = false;
@@ -144,6 +148,15 @@ public class MainCharacterController : MonoBehaviour
                 m_visualsTransform.LookAt(m_visualsTransform.position + Vector3.right);
         }
 
+        if (m_moveInput.x != 0)
+        {
+            m_animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            m_animator.SetBool("IsRunning", false);
+        }
+
         if (Input.GetButtonDown("Ghost"))
         {
             m_isGhosting = !m_isGhosting; // [REMOVE]
@@ -178,6 +191,7 @@ public class MainCharacterController : MonoBehaviour
             {
                 m_isFreshJumpPress = true;
                 m_timeSinceJumpPress = 0.0f;
+                Helpers.ShockWave(transform.position, jump_shockwave_radius, jump_shockwave_force);
             }
         }
         else
