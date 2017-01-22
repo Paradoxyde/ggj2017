@@ -10,6 +10,7 @@ public class EnemyFiringBehavior : MonoBehaviour
     public float delay_between_shots = 3.0f;
     public float player_target_range = 15.0f;
     public PhaseType phase_type = PhaseType.Neutral;
+    public SFXPreset sound_bullet_fire;
 
     public Transform red_particles;
     public Transform blue_particles;
@@ -27,6 +28,7 @@ public class EnemyFiringBehavior : MonoBehaviour
 
 	void Start ()
     {
+        m_shotCooldown = Random.Range(0, delay_between_shots);
         if (invisible_at_runtime)
         {
             Renderer renderer = GetComponent<Renderer>();
@@ -105,6 +107,13 @@ public class EnemyFiringBehavior : MonoBehaviour
                 {
                     BulletBehavior bb = bullet.GetComponent<BulletBehavior>();
                     bb.SetPhaseType(phase_type);
+
+                    GameObject go = GameObject.FindGameObjectWithTag("Player");
+
+                    if (go != null && (bullet.transform.position - go.transform.position).sqrMagnitude < 400)
+                    {
+                        SFXExtension.PlayNow(sound_bullet_fire);
+                    }
                 }
             }
         }

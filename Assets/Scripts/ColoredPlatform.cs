@@ -8,6 +8,7 @@ public class ColoredPlatform : MonoBehaviour
 
     bool m_isActive = true;
     Collider2D m_collider;
+    public SFXPreset player_killed_by_color_platform;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class ColoredPlatform : MonoBehaviour
                 {
                     PlatformingEntitiesManager pem = playerGO.GetComponent<PlatformingEntitiesManager>();
                     pem.OnPlayerDied();
+                    SFXExtension.PlayNow(player_killed_by_color_platform);
                     return;
                 }
             }
@@ -62,26 +64,6 @@ public class ColoredPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*if (collision.collider.CompareTag("Player"))
-        {
-            GameObject playerGO = collision.collider.gameObject;
-            Transform childTran = playerGO.transform.FindChild("killintersectvolume");
-            
-            Collider2D thisCol = GetComponent<Collider2D>();
-
-            Vector3 playerPos = playerGO.transform.position;
-            Collider2D[] colliders = Physics2D.OverlapCapsuleAll(playerPos, new Vector2(0.85f, 1.95f), CapsuleDirection2D.Vertical, 0.0f);
-
-            foreach(Collider2D col in colliders)
-            {
-                if (col == thisCol)
-                {
-                    PlatformingEntitiesManager pem = collision.collider.gameObject.GetComponent<PlatformingEntitiesManager>();
-                    pem.OnPlayerDied();
-                    return;
-                }
-            }
-        }*/
     }
 
     private void OnDrawGizmos()
