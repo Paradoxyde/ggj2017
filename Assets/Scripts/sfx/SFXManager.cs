@@ -13,7 +13,7 @@ public class SFXManager : MonoBehaviour
 
     private List<SFXPreset> m_SFXPresets = new List<SFXPreset>();
     public void Register(SFXPreset preset) { m_SFXPresets.Add(preset); }
-    
+
     void Awake()
     {
         Debug.Assert(!Instance);
@@ -54,7 +54,7 @@ public class SFXManager : MonoBehaviour
 
 static class SFXExtension
 {
-    static void PlayNow(this SFXPreset preset)
+    public static void PlayNow(this SFXPreset preset)
     {
         SFXManager.Instance.PlaySound(preset);
     }
