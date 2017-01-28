@@ -148,7 +148,7 @@ public class MainCharacterController : MonoBehaviour
         m_animator.SetBool("OnLand", m_isGrounded && !wasOnGround);
         m_animator.SetBool("IsGrounded", m_isGrounded);
         m_animator.SetBool("IsWallSliding", !m_isGrounded && m_isHuggingWall);
-        m_animator.SetBool("CanDoubleJump", m_airJumpCount != 0);
+        m_animator.SetBool("CanDoubleJump", m_airJumpCount != 2);
 
         m_airJumpHook = m_platformingEntities.GetClosestActiveAirJumpHook(transform.position, air_jump_hook_range);
     }
@@ -158,13 +158,17 @@ public class MainCharacterController : MonoBehaviour
         m_moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
 
-        if (Mathf.Abs(m_moveInput.x) > 0.05f)
+        if (Mathf.Abs(m_moveInput.x) > 0f)
         {
             bool currentInputIsRight = m_moveInput.x >= 0;
             
             m_animator.SetBool("HasChangedDirection", currentInputIsRight != m_lastInputWasRight);
 
             m_lastInputWasRight = currentInputIsRight;
+        }
+        else
+        {
+            m_animator.SetBool("HasChangedDirection", false);
         }
 
         if (m_moveInput.x > 0f)
